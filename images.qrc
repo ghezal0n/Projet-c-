@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/background.jpg</file>
+        <file>images/constructionsite_942146.jpg</file>
+        <file>images/shutterstock_752076598.jpg</file>
+        <file>images/HEAD-_5BUpdate_5D_Top_4_AutoCAD_Alternatives_Hero_-_notext_-_880x440.png</file>
+        <file>images/c374bcf2af1deeee10fa2281c5c9b1cc.jpg</file>
+        <file>images/istockphoto-507065413-170667a.jpg</file>
+        <file>images/136966701-builder-and-architect-man-design-construction-work-repair-reconstruction-industry-build-and-project-.png</file>
+        <file>images/1.png</file>
+        <file>images/2.png</file>
+        <file>images/3.png</file>
+        <file>images/4.png</file>
+        <file>images/5.png</file>
+        <file>images/9.png</file>
+        <file>images/10.png</file>
+        <file>images/click.mp3</file>
+        <file>images/Click2.mp3</file>
+        <file>images/off.png</file>
+        <file>images/on.png</file>
+        <file>images/backgmusic.mp3</file>
+        <file>images/7.png</file>
+        <file>images/left.png</file>
+        <file>images/right.png</file>
+        <file>images/refresh1.png</file>
+        <file>images/refresh2.png</file>
+    </qresource>
+</RCC>
