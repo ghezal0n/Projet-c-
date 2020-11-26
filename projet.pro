@@ -61,4 +61,5 @@ RESOURCES += \
     images.qrc
 
 DISTFILES += \
+    images/find_files_on_linux.jpg \
     images/istockphoto-507065413-170667a.jpg

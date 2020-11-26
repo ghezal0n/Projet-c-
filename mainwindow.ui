@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>973</width>
-    <height>647</height>
+    <width>1114</width>
+    <height>733</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,8 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">QTabWidget::pane { /* The tab widget frame */
+   <string notr="true">border-image: url(:/images/HEAD-_5BUpdate_5D_Top_4_AutoCAD_Alternatives_Hero_-_notext_-_880x440.png);
+QTabWidget::pane { /* The tab widget frame */
     /* border-top: 2px solid #FFFFFF;*/
  }
 
@@ -39,6 +40,7 @@
      padding: 2px;
  }
 
+
 QTabBar::tab:hover {
   border-color: #FFFFFF;
  }
@@ -57,10 +59,15 @@ QTabBar::tab:hover {
      margin-top: 5px; /* make non-selected tabs look smaller */
  }
 
-QFrame#frame,#frame_3,#frame_5,#frame_6,#frame_12{
-background:rgba(247,229,217,0.5);
-border-radius:5px;
+QFrame#frame_3,#frame_5,#frame_12{
+background:rgba(247,229,217,0.7);
+/*border-radius:5px;*/
 }
+QFrame#frame,#frame_6{
+background:rgba(247,229,217,0.5);
+/*border-radius:5px;*/
+}
+
 
 QFrame#frame_2,#frame_4,#frame1_3,#frame1,#frame_7,#frame1_4,#frame_8,#frame_9,#frame_10,#frame_11{
 background:rgba(119,181,254,0.7);
@@ -76,12 +83,13 @@ border:none;
 border-bottom:1px solid #2d3436;
 }
 QPushButton{
-/*background:  rgba(119,181,254,0.5);*/
+
 background:   qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
                                  stop: 0  #77b5fe, stop: 0.4 #5da7fe,
                                  stop: 0.5#4399fe, stop: 1.0#1b83fe);
 border-radius:20px;
 border-radius:15px;
+border: none;
 
 }
 
@@ -92,6 +100,7 @@ background:   qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
                                  stop: 0 #1b83fe, stop: 0.4 #4399fe,
                                  stop: 0.5 #5da7fe, stop: 1.0 #77b5fe);
 color:white;
+
 }
 QTableView {
 /*background:rgba(119,181,254,0.8);*/
@@ -110,8 +119,8 @@ background:   qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
      <rect>
       <x>60</x>
       <y>70</y>
-      <width>841</width>
-      <height>481</height>
+      <width>991</width>
+      <height>571</height>
      </rect>
     </property>
     <property name="font">
@@ -133,8 +142,8 @@ background:   qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>841</width>
-        <height>451</height>
+        <width>991</width>
+        <height>541</height>
        </rect>
       </property>
       <property name="font">
@@ -145,7 +154,7 @@ background:   qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
        </font>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="ajouter">
        <attribute name="title">
@@ -154,10 +163,10 @@ background:   qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
        <widget class="QFrame" name="frame">
         <property name="geometry">
          <rect>
-          <x>-30</x>
+          <x>0</x>
           <y>0</y>
-          <width>871</width>
-          <height>431</height>
+          <width>991</width>
+          <height>511</height>
          </rect>
         </property>
         <property name="frameShape">
@@ -169,10 +178,10 @@ background:   qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
         <widget class="QFrame" name="frame_2">
          <property name="geometry">
           <rect>
-           <x>40</x>
-           <y>30</y>
+           <x>270</x>
+           <y>20</y>
            <width>441</width>
-           <height>371</height>
+           <height>471</height>
           </rect>
          </property>
          <property name="frameShape">
@@ -185,9 +194,9 @@ background:   qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
           <property name="geometry">
            <rect>
             <x>20</x>
-            <y>10</y>
+            <y>70</y>
             <width>401</width>
-            <height>281</height>
+            <height>301</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout">
@@ -302,7 +311,7 @@ background:   qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
           <property name="geometry">
            <rect>
             <x>110</x>
-            <y>320</y>
+            <y>400</y>
             <width>211</width>
             <height>31</height>
            </rect>
@@ -318,21 +327,50 @@ background:   qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
            <string>AJOUTER</string>
           </property>
          </widget>
+         <widget class="QLabel" name="label_67">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>20</y>
+            <width>211</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+color: black;
+
+border: none;
+}</string>
+          </property>
+          <property name="text">
+           <string>Remplis ce formulaire</string>
+          </property>
+         </widget>
         </widget>
-        <widget class="QGraphicsView" name="graphicsView">
+        <widget class="QGraphicsView" name="graphicsView_13">
          <property name="geometry">
           <rect>
-           <x>530</x>
-           <y>90</y>
-           <width>311</width>
-           <height>241</height>
+           <x>270</x>
+           <y>20</y>
+           <width>441</width>
+           <height>471</height>
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true">border-image: url(:/images/c374bcf2af1deeee10fa2281c5c9b1cc.jpg);
-border-radius:50px;</string>
+          <string notr="true">border-image: url(:/images/Chantier_Numerique.jpg);
+border-radius:15px;</string>
          </property>
         </widget>
+        <zorder>graphicsView_13</zorder>
+        <zorder>frame_2</zorder>
        </widget>
       </widget>
       <widget class="QWidget" name="listedeschantiers">
@@ -344,8 +382,8 @@ border-radius:50px;</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>841</width>
-          <height>421</height>
+          <width>991</width>
+          <height>511</height>
          </rect>
         </property>
         <property name="frameShape">
@@ -358,9 +396,9 @@ border-radius:50px;</string>
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>100</y>
-           <width>541</width>
-           <height>311</height>
+           <y>130</y>
+           <width>651</width>
+           <height>361</height>
           </rect>
          </property>
          <property name="styleSheet">
@@ -370,10 +408,10 @@ border-radius:50px;</string>
         <widget class="QFrame" name="frame_4">
          <property name="geometry">
           <rect>
-           <x>560</x>
-           <y>10</y>
-           <width>271</width>
-           <height>321</height>
+           <x>680</x>
+           <y>20</y>
+           <width>301</width>
+           <height>371</height>
           </rect>
          </property>
          <property name="frameShape">
@@ -385,9 +423,9 @@ border-radius:50px;</string>
          <widget class="QWidget" name="gridLayoutWidget_2">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>10</y>
-            <width>256</width>
+            <x>5</x>
+            <y>30</y>
+            <width>291</width>
             <height>261</height>
            </rect>
           </property>
@@ -398,67 +436,6 @@ border-radius:50px;</string>
            <property name="horizontalSpacing">
             <number>6</number>
            </property>
-           <item row="4" column="0">
-            <widget class="QLabel" name="label_9">
-             <property name="font">
-              <font>
-               <family>Century</family>
-               <pointsize>11</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Date limite :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_10">
-             <property name="font">
-              <font>
-               <family>Century</family>
-               <pointsize>11</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Adresse :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QLineEdit" name="sur_chmo"/>
-           </item>
-           <item row="1" column="1">
-            <widget class="QLineEdit" name="ad_chmo"/>
-           </item>
-           <item row="3" column="1">
-            <widget class="QLineEdit" name="bud_chmo"/>
-           </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_6">
-             <property name="font">
-              <font>
-               <family>Century</family>
-               <pointsize>11</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Identifiant :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_8">
-             <property name="font">
-              <font>
-               <family>Century</family>
-               <pointsize>11</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Budget :</string>
-             </property>
-            </widget>
-           </item>
            <item row="4" column="1">
             <widget class="QDateEdit" name="date_chmo">
              <property name="minimumSize">
@@ -481,6 +458,51 @@ border-radius:50px;</string>
              </property>
             </widget>
            </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_6">
+             <property name="font">
+              <font>
+               <family>Century</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Identifiant :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_10">
+             <property name="font">
+              <font>
+               <family>Century</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Adresse :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_8">
+             <property name="font">
+              <font>
+               <family>Century</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Budget :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="sur_chmo"/>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLineEdit" name="bud_chmo"/>
+           </item>
            <item row="0" column="1">
             <widget class="QComboBox" name="id_chmo">
              <property name="contextMenuPolicy">
@@ -488,6 +510,22 @@ border-radius:50px;</string>
              </property>
              <property name="currentText">
               <string/>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="ad_chmo"/>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_9">
+             <property name="font">
+              <font>
+               <family>Century</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Date limite :</string>
              </property>
             </widget>
            </item>
@@ -509,8 +547,8 @@ border-radius:50px;</string>
          <widget class="QPushButton" name="modifierchantier">
           <property name="geometry">
            <rect>
-            <x>60</x>
-            <y>270</y>
+            <x>80</x>
+            <y>320</y>
             <width>141</width>
             <height>31</height>
            </rect>
@@ -530,10 +568,10 @@ border-radius:50px;</string>
         <widget class="QFrame" name="frame1_3">
          <property name="geometry">
           <rect>
-           <x>560</x>
-           <y>340</y>
-           <width>271</width>
-           <height>71</height>
+           <x>680</x>
+           <y>400</y>
+           <width>301</width>
+           <height>91</height>
           </rect>
          </property>
          <property name="frameShape">
@@ -542,70 +580,14 @@ border-radius:50px;</string>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <widget class="QLabel" name="label_65">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>0</y>
-            <width>251</width>
-            <height>31</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>11</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QLabel{
-color: black;
-
-border: none;
-}</string>
-          </property>
-          <property name="text">
-           <string>choisir un identifant à supprimer</string>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="sup_id">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>40</y>
-            <width>101</width>
-            <height>20</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="placeholderText">
-           <string>Identifiant </string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="supprimerchantier">
-          <property name="geometry">
-           <rect>
-            <x>130</x>
-            <y>30</y>
-            <width>121</width>
-            <height>31</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>SUPPRIMER</string>
-          </property>
-         </widget>
         </widget>
         <widget class="QGraphicsView" name="graphicsView_2">
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>100</y>
-           <width>541</width>
-           <height>311</height>
+           <y>130</y>
+           <width>651</width>
+           <height>361</height>
           </rect>
          </property>
          <property name="styleSheet">
@@ -618,10 +600,10 @@ border: none;
         <widget class="QFrame" name="frame_8">
          <property name="geometry">
           <rect>
-           <x>310</x>
-           <y>10</y>
-           <width>241</width>
-           <height>81</height>
+           <x>400</x>
+           <y>20</y>
+           <width>261</width>
+           <height>91</height>
           </rect>
          </property>
          <property name="frameShape">
@@ -635,8 +617,8 @@ border: none;
            <rect>
             <x>10</x>
             <y>10</y>
-            <width>221</width>
-            <height>61</height>
+            <width>241</width>
+            <height>71</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
@@ -708,27 +690,30 @@ border: none;
         <widget class="QPushButton" name="pushButton_5">
          <property name="geometry">
           <rect>
-           <x>0</x>
+           <x>40</x>
            <y>10</y>
-           <width>51</width>
-           <height>41</height>
+           <width>71</width>
+           <height>51</height>
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: transparent;
+          <string notr="true">QPushButton{
+background-color: transparent;
 
 background: none;
 border: none;
-background-repeat: none;</string>
+background-repeat: none;
+}
+</string>
          </property>
         </widget>
         <widget class="QFrame" name="frame_10">
          <property name="geometry">
           <rect>
-           <x>110</x>
-           <y>10</y>
-           <width>191</width>
-           <height>81</height>
+           <x>160</x>
+           <y>20</y>
+           <width>221</width>
+           <height>91</height>
           </rect>
          </property>
          <property name="frameShape">
@@ -737,87 +722,220 @@ background-repeat: none;</string>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <widget class="QWidget" name="formLayoutWidget">
+         <widget class="QWidget" name="verticalLayoutWidget_3">
           <property name="geometry">
            <rect>
             <x>10</x>
             <y>10</y>
-            <width>172</width>
-            <height>61</height>
+            <width>201</width>
+            <height>71</height>
            </rect>
           </property>
-          <layout class="QFormLayout" name="formLayout_2">
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_11">
-             <property name="font">
-              <font>
-               <family>Century</family>
-               <pointsize>11</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Trier par :</string>
-             </property>
-            </widget>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <widget class="QRadioButton" name="radioButton_7">
+               <property name="text">
+                <string>ABC</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="radioButton_8">
+               <property name="text">
+                <string>CBA</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
-           <item row="1" column="1">
-            <widget class="QComboBox" name="comboBox">
-             <property name="layoutDirection">
-              <enum>Qt::LeftToRight</enum>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QComboBox{
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <widget class="QLabel" name="label_11">
+               <property name="font">
+                <font>
+                 <family>Century</family>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Trier par :</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBox">
+               <property name="layoutDirection">
+                <enum>Qt::LeftToRight</enum>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QComboBox{
 border:none;
 border-bottom:1px solid #2d3436;
 }
 QComboBox::hover{
 background: rgba(119,181,254,0.5);
 }</string>
-             </property>
-             <item>
-              <property name="text">
-               <string>Select</string>
-              </property>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Select</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>ID</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Surface</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Budget</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Date limite</string>
+                </property>
+               </item>
+              </widget>
              </item>
-             <item>
-              <property name="text">
-               <string>ID</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Surface</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Budget</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Date limite</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QRadioButton" name="radioButton_8">
-             <property name="text">
-              <string>CBA</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0">
-            <widget class="QRadioButton" name="radioButton_7">
-             <property name="text">
-              <string>ABC</string>
-             </property>
-            </widget>
+            </layout>
            </item>
           </layout>
          </widget>
         </widget>
+        <widget class="QGraphicsView" name="graphicsView_6">
+         <property name="geometry">
+          <rect>
+           <x>680</x>
+           <y>20</y>
+           <width>301</width>
+           <height>371</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-image: url(:/images/Chantier_Numerique.jpg);
+border-radius:15px;</string>
+         </property>
+        </widget>
+        <widget class="QGraphicsView" name="graphicsView_7">
+         <property name="geometry">
+          <rect>
+           <x>680</x>
+           <y>400</y>
+           <width>301</width>
+           <height>91</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-image: url(:/images/delete.jpg);border-radius:15px;</string>
+         </property>
+        </widget>
+        <widget class="QWidget" name="verticalLayoutWidget_4">
+         <property name="geometry">
+          <rect>
+           <x>690</x>
+           <y>410</y>
+           <width>281</width>
+           <height>71</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QLabel" name="label_65">
+            <property name="font">
+             <font>
+              <pointsize>11</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel{
+color: black;
+
+border: none;
+}</string>
+            </property>
+            <property name="text">
+             <string>    Choisir un identifant à supprimer</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <widget class="QLineEdit" name="sup_id">
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="placeholderText">
+               <string>Identifiant </string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="supprimerchantier">
+              <property name="maximumSize">
+               <size>
+                <width>120</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>SUPPRIMER</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QGraphicsView" name="graphicsView_8">
+         <property name="geometry">
+          <rect>
+           <x>400</x>
+           <y>20</y>
+           <width>261</width>
+           <height>91</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+border-image: url(:/images/GettyImages-1047578412-692fa117cf86450287d8873eeb1a95c8-aa8d654cec814174a9e07bdae85a1eb7.jpg);
+border-radius:15px;</string>
+         </property>
+        </widget>
+        <widget class="QGraphicsView" name="graphicsView_9">
+         <property name="geometry">
+          <rect>
+           <x>160</x>
+           <y>20</y>
+           <width>221</width>
+           <height>91</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-image: url(:/images/epi-chantier.jpg);border-radius:15px;</string>
+         </property>
+        </widget>
+        <zorder>graphicsView_9</zorder>
+        <zorder>graphicsView_8</zorder>
+        <zorder>graphicsView_7</zorder>
+        <zorder>graphicsView_6</zorder>
         <zorder>graphicsView_2</zorder>
         <zorder>tabchantier</zorder>
         <zorder>frame_4</zorder>
@@ -825,6 +943,7 @@ background: rgba(119,181,254,0.5);
         <zorder>frame_8</zorder>
         <zorder>pushButton_5</zorder>
         <zorder>frame_10</zorder>
+        <zorder>verticalLayoutWidget_4</zorder>
        </widget>
       </widget>
       <widget class="QWidget" name="tab_4">
@@ -959,8 +1078,8 @@ background: rgba(119,181,254,0.5);
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>841</width>
-        <height>451</height>
+        <width>991</width>
+        <height>541</height>
        </rect>
       </property>
       <property name="font">
@@ -969,7 +1088,7 @@ background: rgba(119,181,254,0.5);
        </font>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -978,10 +1097,10 @@ background: rgba(119,181,254,0.5);
        <widget class="QFrame" name="frame_6">
         <property name="geometry">
          <rect>
-          <x>-10</x>
+          <x>0</x>
           <y>0</y>
-          <width>851</width>
-          <height>421</height>
+          <width>991</width>
+          <height>511</height>
          </rect>
         </property>
         <property name="frameShape">
@@ -993,10 +1112,10 @@ background: rgba(119,181,254,0.5);
         <widget class="QFrame" name="frame1">
          <property name="geometry">
           <rect>
-           <x>30</x>
-           <y>10</y>
+           <x>270</x>
+           <y>20</y>
            <width>441</width>
-           <height>401</height>
+           <height>471</height>
           </rect>
          </property>
          <property name="frameShape">
@@ -1005,40 +1124,13 @@ background: rgba(119,181,254,0.5);
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <widget class="QLabel" name="label_64">
-          <property name="geometry">
-           <rect>
-            <x>130</x>
-            <y>20</y>
-            <width>191</width>
-            <height>16</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>11</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QLabel{
-color: black;
-
-border: none;
-}</string>
-          </property>
-          <property name="text">
-           <string>Ajouter Un intervenant</string>
-          </property>
-         </widget>
          <widget class="QWidget" name="gridLayoutWidget_3">
           <property name="geometry">
            <rect>
             <x>20</x>
             <y>50</y>
             <width>401</width>
-            <height>181</height>
+            <height>361</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_3">
@@ -1128,7 +1220,7 @@ border: none;
           <property name="geometry">
            <rect>
             <x>110</x>
-            <y>340</y>
+            <y>420</y>
             <width>211</width>
             <height>31</height>
            </rect>
@@ -1144,21 +1236,50 @@ border: none;
            <string>AJOUTER</string>
           </property>
          </widget>
+         <widget class="QLabel" name="label_68">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>20</y>
+            <width>211</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+color: black;
+
+border: none;
+}</string>
+          </property>
+          <property name="text">
+           <string>Remplis ce formulaire</string>
+          </property>
+         </widget>
         </widget>
-        <widget class="QGraphicsView" name="graphicsView_3">
+        <widget class="QGraphicsView" name="graphicsView_14">
          <property name="geometry">
           <rect>
-           <x>510</x>
-           <y>50</y>
-           <width>301</width>
-           <height>291</height>
+           <x>270</x>
+           <y>20</y>
+           <width>441</width>
+           <height>471</height>
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true">border-image: url(:/images/istockphoto-507065413-170667a.jpg);
-border-radius:50px;</string>
+          <string notr="true">border-image: url(:/images/Chantier_Numerique.jpg);
+border-radius:15px;</string>
          </property>
         </widget>
+        <zorder>graphicsView_14</zorder>
+        <zorder>frame1</zorder>
        </widget>
       </widget>
       <widget class="QWidget" name="tab_3">
@@ -1168,10 +1289,10 @@ border-radius:50px;</string>
        <widget class="QFrame" name="frame_5">
         <property name="geometry">
          <rect>
-          <x>-1</x>
+          <x>0</x>
           <y>0</y>
-          <width>841</width>
-          <height>421</height>
+          <width>991</width>
+          <height>511</height>
          </rect>
         </property>
         <property name="frameShape">
@@ -1183,10 +1304,10 @@ border-radius:50px;</string>
         <widget class="QFrame" name="frame1_4">
          <property name="geometry">
           <rect>
-           <x>560</x>
-           <y>340</y>
-           <width>271</width>
-           <height>71</height>
+           <x>680</x>
+           <y>400</y>
+           <width>301</width>
+           <height>91</height>
           </rect>
          </property>
          <property name="frameShape">
@@ -1195,77 +1316,90 @@ border-radius:50px;</string>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <widget class="QLabel" name="label_67">
+         <widget class="QWidget" name="verticalLayoutWidget_5">
           <property name="geometry">
            <rect>
-            <x>40</x>
-            <y>0</y>
-            <width>221</width>
-            <height>31</height>
+            <x>10</x>
+            <y>10</y>
+            <width>281</width>
+            <height>71</height>
            </rect>
           </property>
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-            <weight>50</weight>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QLabel{
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <widget class="QLabel" name="label_66">
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QLabel{
 color: black;
 
 border: none;
 }</string>
-          </property>
-          <property name="text">
-           <string>Supprimer un intervenant  par id</string>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="lineEdit_23">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>40</y>
-            <width>101</width>
-            <height>20</height>
-           </rect>
-          </property>
-          <property name="placeholderText">
-           <string>Identifiant</string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="supprimerchantier_3">
-          <property name="geometry">
-           <rect>
-            <x>130</x>
-            <y>30</y>
-            <width>131</width>
-            <height>31</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>SUPPRIMER</string>
-          </property>
+             </property>
+             <property name="text">
+              <string>    Choisir un identifant à supprimer</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_6">
+             <item>
+              <widget class="QLineEdit" name="lineEdit_23">
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="placeholderText">
+                <string>Identifiant </string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="supprimerchantier_3">
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>SUPPRIMER</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
          </widget>
         </widget>
         <widget class="QTableView" name="tabcha">
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>100</y>
-           <width>541</width>
-           <height>311</height>
+           <y>130</y>
+           <width>651</width>
+           <height>361</height>
           </rect>
          </property>
         </widget>
         <widget class="QFrame" name="frame_7">
          <property name="geometry">
           <rect>
-           <x>560</x>
-           <y>10</y>
-           <width>271</width>
-           <height>321</height>
+           <x>680</x>
+           <y>20</y>
+           <width>301</width>
+           <height>371</height>
           </rect>
          </property>
          <property name="frameShape">
@@ -1278,8 +1412,8 @@ border: none;
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>10</y>
-            <width>251</width>
+            <y>40</y>
+            <width>281</width>
             <height>261</height>
            </rect>
           </property>
@@ -1290,50 +1424,11 @@ border: none;
            <property name="horizontalSpacing">
             <number>6</number>
            </property>
-           <item row="2" column="1">
-            <widget class="QLineEdit" name="lineEditsurface_4"/>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_22">
-             <property name="font">
-              <font>
-               <family>Century</family>
-               <pointsize>11</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Prénom :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_18">
-             <property name="font">
-              <font>
-               <family>Century</family>
-               <pointsize>11</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Nom :</string>
-             </property>
-            </widget>
+           <item row="3" column="1">
+            <widget class="QLineEdit" name="lineEditbudget_4"/>
            </item>
            <item row="1" column="1">
             <widget class="QLineEdit" name="lineEditadres_4"/>
-           </item>
-           <item row="4" column="0">
-            <widget class="QLabel" name="label_19">
-             <property name="font">
-              <font>
-               <family>Century</family>
-               <pointsize>11</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>E-mail :</string>
-             </property>
-            </widget>
            </item>
            <item row="0" column="1">
             <widget class="QComboBox" name="comboBox_2">
@@ -1361,11 +1456,44 @@ background: rgba(119,181,254,0.5);
              </property>
             </widget>
            </item>
-           <item row="4" column="1">
-            <widget class="QLineEdit" name="lineEdit_6"/>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_19">
+             <property name="font">
+              <font>
+               <family>Century</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>E-mail :</string>
+             </property>
+            </widget>
            </item>
-           <item row="3" column="1">
-            <widget class="QLineEdit" name="lineEditbudget_4"/>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_22">
+             <property name="font">
+              <font>
+               <family>Century</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Prénom :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_18">
+             <property name="font">
+              <font>
+               <family>Century</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Nom :</string>
+             </property>
+            </widget>
            </item>
            <item row="0" column="0">
             <widget class="QLabel" name="label_20">
@@ -1380,13 +1508,19 @@ background: rgba(119,181,254,0.5);
              </property>
             </widget>
            </item>
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="lineEditsurface_4"/>
+           </item>
+           <item row="4" column="1">
+            <widget class="QLineEdit" name="lineEdit_6"/>
+           </item>
           </layout>
          </widget>
          <widget class="QPushButton" name="modifierchantier_3">
           <property name="geometry">
            <rect>
-            <x>60</x>
-            <y>270</y>
+            <x>80</x>
+            <y>320</y>
             <width>151</width>
             <height>31</height>
            </rect>
@@ -1407,14 +1541,14 @@ background: rgba(119,181,254,0.5);
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>100</y>
-           <width>541</width>
-           <height>311</height>
+           <y>130</y>
+           <width>651</width>
+           <height>361</height>
           </rect>
          </property>
          <property name="styleSheet">
           <string notr="true">
-border-image: url(:/images/136966701-builder-and-architect-man-design-construction-work-repair-reconstruction-industry-build-and-project-.png);
+border-image: url(:/images/constructionsite_942146.jpg);
      border-top-left-radius: 20px;
      border-top-right-radius: 20px;
  border-bottom-left-radius: 20px;</string>
@@ -1423,10 +1557,10 @@ border-image: url(:/images/136966701-builder-and-architect-man-design-constructi
         <widget class="QFrame" name="frame_9">
          <property name="geometry">
           <rect>
-           <x>310</x>
-           <y>10</y>
-           <width>241</width>
-           <height>81</height>
+           <x>400</x>
+           <y>20</y>
+           <width>261</width>
+           <height>91</height>
           </rect>
          </property>
          <property name="frameShape">
@@ -1440,8 +1574,8 @@ border-image: url(:/images/136966701-builder-and-architect-man-design-constructi
            <rect>
             <x>10</x>
             <y>10</y>
-            <width>221</width>
-            <height>61</height>
+            <width>241</width>
+            <height>71</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -1513,10 +1647,10 @@ border-image: url(:/images/136966701-builder-and-architect-man-design-constructi
         <widget class="QPushButton" name="pushButton_6">
          <property name="geometry">
           <rect>
-           <x>0</x>
+           <x>40</x>
            <y>10</y>
-           <width>51</width>
-           <height>41</height>
+           <width>71</width>
+           <height>51</height>
           </rect>
          </property>
          <property name="styleSheet">
@@ -1527,13 +1661,70 @@ border: none;
 background-repeat: none;</string>
          </property>
         </widget>
+        <widget class="QGraphicsView" name="graphicsView_5">
+         <property name="geometry">
+          <rect>
+           <x>680</x>
+           <y>20</y>
+           <width>301</width>
+           <height>371</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+border-image: url(:/images/Chantier_Numerique.jpg);
+border-radius:15px;</string>
+         </property>
+        </widget>
+        <widget class="QGraphicsView" name="graphicsView_10">
+         <property name="geometry">
+          <rect>
+           <x>680</x>
+           <y>400</y>
+           <width>301</width>
+           <height>91</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-image: url(:/images/delete.jpg);border-radius:15px;</string>
+         </property>
+        </widget>
+        <widget class="QGraphicsView" name="graphicsView_11">
+         <property name="geometry">
+          <rect>
+           <x>400</x>
+           <y>20</y>
+           <width>261</width>
+           <height>91</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+border-image: url(:/images/GettyImages-1047578412-692fa117cf86450287d8873eeb1a95c8-aa8d654cec814174a9e07bdae85a1eb7.jpg);
+border-radius:15px;</string>
+         </property>
+        </widget>
+        <widget class="QGraphicsView" name="graphicsView_12">
+         <property name="geometry">
+          <rect>
+           <x>160</x>
+           <y>20</y>
+           <width>221</width>
+           <height>91</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-radius:15px;
+border-image: url(:/images/c374bcf2af1deeee10fa2281c5c9b1cc.jpg);</string>
+         </property>
+        </widget>
         <widget class="QFrame" name="frame_11">
          <property name="geometry">
           <rect>
-           <x>110</x>
-           <y>10</y>
-           <width>191</width>
-           <height>81</height>
+           <x>160</x>
+           <y>20</y>
+           <width>221</width>
+           <height>91</height>
           </rect>
          </property>
          <property name="frameShape">
@@ -1542,83 +1733,95 @@ background-repeat: none;</string>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <widget class="QWidget" name="formLayoutWidget_2">
+         <widget class="QWidget" name="verticalLayoutWidget_6">
           <property name="geometry">
            <rect>
             <x>10</x>
             <y>10</y>
-            <width>172</width>
-            <height>61</height>
+            <width>201</width>
+            <height>71</height>
            </rect>
           </property>
-          <layout class="QFormLayout" name="formLayout_3">
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_12">
-             <property name="font">
-              <font>
-               <family>Century</family>
-               <pointsize>11</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Trier par :</string>
-             </property>
-            </widget>
+          <layout class="QVBoxLayout" name="verticalLayout_7">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_12">
+             <item>
+              <widget class="QRadioButton" name="radioButton_13">
+               <property name="text">
+                <string>ABC</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="radioButton_12">
+               <property name="text">
+                <string>CBA</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
-           <item row="1" column="1">
-            <widget class="QComboBox" name="comboBox_4">
-             <property name="layoutDirection">
-              <enum>Qt::LeftToRight</enum>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QComboBox{
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_8">
+             <item>
+              <widget class="QLabel" name="label_12">
+               <property name="font">
+                <font>
+                 <family>Century</family>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Trier par :</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBox_4">
+               <property name="layoutDirection">
+                <enum>Qt::LeftToRight</enum>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QComboBox{
 border:none;
 border-bottom:1px solid #2d3436;
 }
 QComboBox::hover{
 background: rgba(119,181,254,0.5);
 }</string>
-             </property>
-             <item>
-              <property name="text">
-               <string>Select</string>
-              </property>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Select</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Nom</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Prénom</string>
+                </property>
+               </item>
+              </widget>
              </item>
-             <item>
-              <property name="text">
-               <string>Nom</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Prénom</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QRadioButton" name="radioButton_12">
-             <property name="text">
-              <string>CBA</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0">
-            <widget class="QRadioButton" name="radioButton_13">
-             <property name="text">
-              <string>ABC</string>
-             </property>
-            </widget>
+            </layout>
            </item>
           </layout>
          </widget>
         </widget>
+        <zorder>graphicsView_5</zorder>
         <zorder>graphicsView_4</zorder>
-        <zorder>frame1_4</zorder>
         <zorder>tabcha</zorder>
         <zorder>frame_7</zorder>
-        <zorder>frame_9</zorder>
         <zorder>pushButton_6</zorder>
+        <zorder>graphicsView_10</zorder>
+        <zorder>frame1_4</zorder>
+        <zorder>graphicsView_11</zorder>
+        <zorder>frame_9</zorder>
+        <zorder>graphicsView_12</zorder>
         <zorder>frame_11</zorder>
        </widget>
       </widget>
@@ -1628,7 +1831,7 @@ background: rgba(119,181,254,0.5);
    <widget class="QPushButton" name="pushButton_4">
     <property name="geometry">
      <rect>
-      <x>900</x>
+      <x>1030</x>
       <y>0</y>
       <width>71</width>
       <height>61</height>
@@ -1648,7 +1851,7 @@ background-repeat: none;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>973</width>
+     <width>1114</width>
      <height>21</height>
     </rect>
    </property>

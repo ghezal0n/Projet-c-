@@ -60,7 +60,7 @@ bool intervenat::modifier()
     query.prepare("UPDATE inter SET nom=:nom, prenom=:prnom , gsm=:gsm , email=:email where id =:idd") ;
     query.bindValue(":idd",res);
     query.bindValue(":nom",nom);
-    query.bindValue(":prenom",prnom);
+    query.bindValue(":prnom",prnom);
     query.bindValue(":gsm",res1);
     query.bindValue(":email",email);
 

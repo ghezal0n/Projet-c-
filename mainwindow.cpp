@@ -49,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent) :
     music = new QMediaPlayer();
     music->setPlaylist(music1);
     music->play();
+    music->setVolume(10);
     /*  **************refresh*******************  */
     ui->pushButton_5->setIcon((QIcon(":/images/refresh1.png")));
     ui->pushButton_5->setIconSize(ui->pushButton_5->size());
@@ -283,25 +284,25 @@ void MainWindow::on_comboBox_2_activated(const QString &)
 
 void MainWindow::on_modifierchantier_3_clicked()
 {
-    int i=ui->lineEdit->text().toInt();
-    QString p=ui->lineEdit_2->text();
-    QString k=ui->lineEdit_3->text();
-    int l=ui->lineEdit_4->text().toInt();
-    QString d= ui->lineEdit_5->text();
+    int i=ui->comboBox_2->currentText().toInt();
+    QString p=ui->lineEditadres_4->text();
+    QString k=ui->lineEditsurface_4->text();
+    int l=ui->lineEditbudget_4->text().toInt();
+    QString d= ui->lineEdit_6->text();
     intervenat c(i,p,k,l,d);
     bool test=c.modifier();
     if(test)
     {    playaudio();
          display_listes();
-        QMessageBox::information(nullptr, QObject::tr("Modifier un chantier"),
-                    QObject::tr("chantier modifier modifié.\n"
+        QMessageBox::information(nullptr, QObject::tr("Modifier un intervenat"),
+                    QObject::tr("un intervenat a été modifier.\n"
                                 "Cliquez sur Ok pour continuer."), QMessageBox::Ok);
     }
     else
 
        QMessageBox::critical(nullptr, QObject::tr("Modifier un chantier"),
                    QObject::tr("Erreur!\n"
-                               "Erreur de modification de le chantier.\n Veuillez réessayer."), QMessageBox::Ok);
+                               "Erreur de modification .\n Veuillez réessayer."), QMessageBox::Ok);
 
 
 
