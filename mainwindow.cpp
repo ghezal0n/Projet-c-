@@ -596,15 +596,13 @@ void MainWindow::on_pushButton_envoyer_clicked()
 {
     SmtpClient smtp("smtp.gmail.com", 465, SmtpClient::SslConnection);
 
-        // We need to set the username (your email address) and the password
-        // for smtp authentification.
 
 
 
                 smtp.setUser("smartmunicipality40@gmail.com");
                 smtp.setPassword("municipality");
 
-        // Now we create a MimeMessage object. This will be the email.
+
 
         MimeMessage message;
 
@@ -612,18 +610,17 @@ void MainWindow::on_pushButton_envoyer_clicked()
         message.addRecipient(new EmailAddress(ui->lineEdit_adresse->text(), "Recipient's name"));
         message.setSubject(ui->lineEdit_objet->text());
 
-        // Now add some text to the email.
-        // First we create a MimeText object.
+
 
         MimeText text;
 
         text.setText(ui->textEdit_texte->toPlainText());
 
-        // Now add it to the mail
+
 
         message.addPart(&text);
 
-        // Now we can send the mail
+
         smtp.connectToHost();
         smtp.login();
         if (smtp.sendMail(message)){
