@@ -227,8 +227,4 @@ model->setHeaderData(3, Qt::Horizontal, QObject::tr("budget"));
 model->setHeaderData(4, Qt::Horizontal, QObject::tr("date limite"));
       return  model;
 }
-QSqlQueryModel * chantier::combo_box1(){
-    QSqlQueryModel * model = new QSqlQueryModel();
-    model->setQuery("Select EMAIL from inter");
-    return model;
-}
+

@@ -1,4 +1,4 @@
-QT       += core gui sql
+QT       += core gui sql printsupport
 QT       +=multimedia
 QT       += core
 QT       += network
@@ -13,6 +13,7 @@ CONFIG += console
 SOURCES += \
     chantier.cpp \
     connexion.cpp \
+    dialog.cpp \
     intervenant.cpp \
     mailing/emailaddress.cpp \
     mailing/mimeattachment.cpp \
@@ -32,6 +33,7 @@ SOURCES += \
 HEADERS += \
     chantier.h \
     connexion.h \
+    dialog.h \
     intervenant.h \
     mailing/SmtpMime \
     mailing/emailaddress.h \
@@ -50,6 +52,7 @@ HEADERS += \
     mainwindow.h
 
 FORMS += \
+    dialog.ui \
     mainwindow.ui
 
 # Default rules for deployment.

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>840</width>
+    <height>419</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+*{
+font-family:century gothic;
+font-size:15px;
+/*background-color:#ffffee;*/
+/*background:transparent;*/
+font-style:black;
+
+
+
+
+}
+#Dialog{
+	border-image: url(:/images/mail-flying-email-envelopes-icons-around-blue-background-seamless-loop-loop-to-make-clip-as-long-as-you-need-see-more-hd-43657842.jpg);
+ background-color:white;
+
+}
+QLabel{
+color: white;
+background:transparent;
+
+}
+
+
+
+
+QPushButton{
+
+background:   qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0  #77b5fe, stop: 0.4 #5da7fe,
+                                 stop: 0.5#4399fe, stop: 1.0#1b83fe);
+border-radius:20px;
+border-radius:15px;
+border: 1px solid white;
+
+}
+
+
+
+QPushButton:hover{
+background:   qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0 #1b83fe, stop: 0.4 #4399fe,
+                                 stop: 0.5 #5da7fe, stop: 1.0 #77b5fe);
+color:white;
+
+}</string>
+  </property>
+  <widget class="QLineEdit" name="lineEdit_adresse">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>80</y>
+     <width>531</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_24">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>80</y>
+     <width>171</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>century gothic</family>
+     <pointsize>-1</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Email du l'intervenant :</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_objet">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>131</y>
+     <width>531</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QFrame" name="frame_12">
+   <property name="geometry">
+    <rect>
+     <x>-1</x>
+     <y>-1</y>
+     <width>841</width>
+     <height>421</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QComboBox" name="comboBox_5">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>30</y>
+      <width>251</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox{
+border:none;
+border-bottom:1px solid #2d3436;
+}
+QComboBox::hover{
+background: rgba(119,181,254,0.5);
+}</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit_texte">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>180</y>
+      <width>531</width>
+      <height>151</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="pushButton_envoyer">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>350</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Envoyer</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_23">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>130</y>
+     <width>91</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>century gothic</family>
+     <pointsize>-1</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Objet :</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_25">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>180</y>
+     <width>91</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>century gothic</family>
+     <pointsize>-1</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Texte :</string>
+   </property>
+  </widget>
+  <zorder>frame_12</zorder>
+  <zorder>lineEdit_adresse</zorder>
+  <zorder>label_24</zorder>
+  <zorder>lineEdit_objet</zorder>
+  <zorder>pushButton_envoyer</zorder>
+  <zorder>label_23</zorder>
+  <zorder>label_25</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

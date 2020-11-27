@@ -48,6 +48,7 @@ public :
     QSqlQueryModel * trier2();
     QSqlQueryModel * trier3();
     QSqlQueryModel * trier4();
+    QSqlQueryModel * combo_box1();
 
 
 

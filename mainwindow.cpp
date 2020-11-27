@@ -13,6 +13,11 @@
 #include <QSqlQueryModel>
 #include <QSqlQuery>
 #include "mailing/SmtpMime"
+#include <stdio.h>
+#include <string.h>
+#include "dialog.h"
+#include <QtPrintSupport>
+#include <QPrintDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -62,8 +67,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pb_ok1->setIconSize(ui->pb_ok1->size());
     ui->pb_ok1_2->setIcon((QIcon(":/images/4.png")));
     ui->pb_ok1_2->setIconSize(ui->pb_ok1_2->size());
-
-
+    /*  **************anu*******************  */
+    ui->pushButton_3->setIcon((QIcon(":/images/60578.png")));
+    ui->pushButton_3->setIconSize(ui->pushButton_3->size());
+    ui->pushButton_7->setIcon((QIcon(":/images/60578.png")));
+    ui->pushButton_7->setIconSize(ui->pushButton_7->size());
+    ui->pushButton_8->setIcon((QIcon(":/images/60578.png")));
+    ui->pushButton_8->setIconSize(ui->pushButton_8->size());
+    ui->pushButton_9->setIcon((QIcon(":/images/60578.png")));
+    ui->pushButton_9->setIconSize(ui->pushButton_9->size());
 
 
 }
@@ -71,15 +83,15 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete music;
 }
 void MainWindow::display_listes()
 {
     ui->tabchantier->setModel(tmp_chantier.afficher());
     ui->id_chmo->setModel(tmp_chantier.combo_box());
+   // ui->lineeditid->setModel(tmp_chantier.combo_box());
     ui->tabcha->setModel(tmp_inter.afficher());
     ui->comboBox_2->setModel(tmp_inter.combo_box());
-    ui->comboBox_5->setModel(tmp_chantier.combo_box1());
-
 
 
 }
@@ -189,6 +201,7 @@ void MainWindow::on_tabchantier_activated(const QModelIndex &index)
 
         while (query.next()) {
 
+            ui->lineEdit_7->setText(query.value(0).toString());
             ui->sup_id->setText(query.value(0).toString());
             ui->id_chmo->setCurrentText(query.value(0).toString());
             ui->ad_chmo->setText(query.value(1).toString());
@@ -216,13 +229,13 @@ void MainWindow::on_supprimerchantier_clicked()
         {
             playaudio();
             display_listes();
-            QMessageBox::information(nullptr, QObject::tr("Supprimer un client"),
+            QMessageBox::information(nullptr, QObject::tr("Supprimer un chantier"),
                         QObject::tr("Client supprimé.\n"
                                     "Click Ok to exit."), QMessageBox::Cancel);
 
         }
         else
-            QMessageBox::critical(nullptr, QObject::tr("Supprimer un client"),
+            QMessageBox::critical(nullptr, QObject::tr("Supprimer un chantier"),
                         QObject::tr("Erreur !.\n"
                                     "Click Cancel to exit."), QMessageBox::Cancel);
 
@@ -355,13 +368,13 @@ void MainWindow::on_supprimerchantier_3_clicked()
         {
             playaudio();
             display_listes();
-            QMessageBox::information(nullptr, QObject::tr("Supprimer un client"),
+            QMessageBox::information(nullptr, QObject::tr("Supprimer un intervenant"),
                         QObject::tr("Client supprimé.\n"
                                     "Click Ok to exit."), QMessageBox::Cancel);
 
         }
         else{
-            QMessageBox::critical(nullptr, QObject::tr("Supprimer un client"),
+            QMessageBox::critical(nullptr, QObject::tr("Supprimer un intervenant"),
                         QObject::tr("Erreur !.\n"
                                     "Click Cancel to exit."), QMessageBox::Cancel);
         playaudio();}
@@ -440,6 +453,8 @@ void MainWindow::on_pushButton_5_toggled(bool checked)
         ui->pushButton_5->setIcon((QIcon(":/images/refresh2.png")));
         ui->pushButton_5->setIconSize(ui->pushButton_5->size());
         display_listes();
+        ui->lineEdit_18->clear();
+        ui->sup_id->clear();
         playaudio();
 
     }
@@ -447,6 +462,8 @@ void MainWindow::on_pushButton_5_toggled(bool checked)
         ui->pushButton_5->setIcon((QIcon(":/images/refresh1.png")));
         ui->pushButton_5->setIconSize(ui->pushButton_5->size());
         display_listes();
+        ui->lineEdit_18->clear();
+        ui->sup_id->clear();
         playaudio();
     }
 
@@ -491,6 +508,8 @@ void MainWindow::on_pushButton_6_toggled(bool checked)
         ui->pushButton_6->setIcon((QIcon(":/images/refresh2.png")));
         ui->pushButton_6->setIconSize(ui->pushButton_6->size());
         display_listes();
+        ui->lineEdit_19->clear();
+        ui->lineEdit_23->clear();
         playaudio();
 
     }
@@ -498,6 +517,8 @@ void MainWindow::on_pushButton_6_toggled(bool checked)
         ui->pushButton_6->setIcon((QIcon(":/images/refresh1.png")));
         ui->pushButton_6->setIconSize(ui->pushButton_6->size());
         display_listes();
+        ui->lineEdit_19->clear();
+        ui->lineEdit_23->clear();
         playaudio();
     }
 
@@ -593,49 +614,156 @@ void MainWindow::on_comboBox_4_activated(const QString &arg1)
 
 
 
-void MainWindow::on_pushButton_envoyer_clicked()
-{
-    SmtpClient smtp("smtp.gmail.com", 465, SmtpClient::SslConnection);
-
-
-
-
-                smtp.setUser("smartmunicipality40@gmail.com");
-                smtp.setPassword("municipality");
-
-
-
-        MimeMessage message;
-
-        message.setSender(new EmailAddress("smartmunicipality40@gmail.com", "Mohamed aouadi"));
-        message.addRecipient(new EmailAddress(ui->lineEdit_adresse->text(), "Recipient's name"));
-        message.setSubject(ui->lineEdit_objet->text());
-
-
-
-        MimeText text;
-
-        text.setText(ui->textEdit_texte->toPlainText());
-
-
-
-        message.addPart(&text);
-
-
-        smtp.connectToHost();
-        smtp.login();
-        if (smtp.sendMail(message)){
-           QMessageBox::information(this, "OK", "email envoyé");
-        }
-        else{
-           QMessageBox::critical(this, "Erreur","email non envoyé");
-        }
-        smtp.quit();
-}
-
 void MainWindow::on_comboBox_5_activated(const QString &)
 {
 
 playaudio();
 
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+
+playaudio();
+    ui->lineEditadres_4->clear();
+        ui->lineEditsurface_4->clear();
+         ui->lineEditbudget_4->clear();
+         ui->lineEdit_6->clear();
+
+}
+
+
+
+
+
+void MainWindow::on_pushButton_7_clicked()
+{
+    playaudio();
+    ui->lineEdit->clear();
+    ui->lineEdit_2->clear();
+    ui->lineEdit_3->clear();
+    ui->lineEdit_4->clear();
+     ui->lineEdit_5->clear();
+}
+
+void MainWindow::on_pushButton_8_clicked()
+{
+    playaudio();
+    ui->lineeditid->clear();
+    ui->lineEditadres->clear();
+    ui->lineEditsurface->clear();
+    ui->lineEditbudget->clear();
+    ui->dateEdit->clear();
+}
+
+void MainWindow::on_pushButton_9_clicked()
+{
+    playaudio();
+    ui->ad_chmo->clear();
+    ui->sur_chmo->clear();
+    ui->bud_chmo->clear();
+    ui->date_chmo->clear();
+}
+
+void MainWindow::on_pushButton_10_clicked()
+{
+    playaudio();
+    Dialog d;
+    d.exec();
+
+}
+
+
+void MainWindow::on_pushButton_11_clicked()
+{
+
+
+
+QMediaPlayer * music =new QMediaPlayer();
+music->setMedia(QUrl("qrc:/images/Flash instant, printer, printing sound effect (128 kbps).mp3"));
+
+
+
+
+
+        QString num1 = ui->lineEdit_7->text();
+        int num = ui->lineEdit_7->text().toInt();
+
+        QSqlQuery query;
+
+        QString id;
+        QString adr;
+        QString surfa;
+        QString bdget,datemil1;
+        QDate datemil;
+
+        if(num1!=""){playaudio();
+
+        query.prepare("select * from chantier where ID_CHANTIER =:id_chantier");
+        query.bindValue(":id_chantier", num);
+        if (query.exec())
+        {
+
+            while (query.next()) {
+
+                 id= query.value(0).toString();
+                 adr= query.value(1).toString();
+                 surfa=query.value(2).toString();
+                 bdget=query.value(3).toString();
+                 datemil = query.value(4).toDate();
+                 datemil1=datemil.toString("dd-MM-yyyy");
+
+
+             }
+        }
+              QPrinter printer(QPrinter::HighResolution);
+                  printer.setPageSize(QPrinter::A4);
+
+                 QPrintDialog *dialog = new QPrintDialog(&printer);
+                  if (dialog->exec() == QDialog::Accepted)
+                  {               QPainter painter(&printer);
+                                  painter.begin(&printer);
+                                  int iYPos = 0;
+                                  int iWidth = printer.width();
+                                  int iHeight = printer.height();
+                                  QPixmap pxPic;
+                                  pxPic.load(":/images/background.jpg","JPG");
+                                  QSize s(iWidth/3, iHeight/5);
+                                  QPixmap pxScaledPic = pxPic.scaled(s, Qt::KeepAspectRatio, Qt::FastTransformation);
+                                  painter.drawPixmap(3700, iYPos, pxScaledPic.width(), pxScaledPic.height(), pxScaledPic);
+                                  iYPos += pxScaledPic.height() + 250;
+                                  QFont f;
+                                      f.setPointSize(20);
+                                      f.setBold(true);
+                                      painter.setFont(f);
+                                   painter.drawText(1800, 500, "CHANTIER");
+                                   f.setPointSize(15);
+                                   f.setBold(true);
+                                   painter.setFont(f);
+                                   painter.drawText(100, 1000, "ID de chantier :");
+                                   painter.drawText(1900, 1000,id);
+                                   painter.drawText(100, 1300, "Aderesse :");
+                                   painter.drawText(1900, 1300,adr);
+                                   painter.drawText(100, 1600, "Surface de terrain en m² :");
+                                   painter.drawText(1900, 1600,surfa);
+                                   painter.drawText(100, 1900, "Budget en dt :");
+                                   painter.drawText(1900, 1900,bdget);
+                                   painter.drawText(100, 2200, "Date limite :");
+                                   painter.drawText(1900, 2200,datemil1);
+
+
+
+
+                                  painter.end();
+                                  music->play();
+
+
+                  }
+        }
+        else
+        {playaudio();
+            QMessageBox::critical(nullptr, QObject::tr("Imprimer chantier"),
+                        QObject::tr("Erreur !.\n"
+                                    "Veuillez selectionner un id d'un chantier à imprimer .\n"
+                                    "Click Cancel to exit."), QMessageBox::Cancel);}
 }

@@ -18,6 +18,8 @@ public:
     ~MainWindow();
     void display_listes();
     void playaudio();
+    void playaudio1();
+    intervenat gettmp(){return tmp_inter;}
 
 
 private slots:
@@ -59,9 +61,23 @@ private slots:
     void on_comboBox_4_activated(const QString &arg1);
 
 
-    void on_pushButton_envoyer_clicked();
+
 
     void on_comboBox_5_activated(const QString &arg1);
+
+    void on_pushButton_3_clicked();
+
+    void on_pushButton_7_clicked();
+
+    void on_pushButton_8_clicked();
+
+    void on_pushButton_9_clicked();
+
+
+
+    void on_pushButton_10_clicked();
+
+    void on_pushButton_11_clicked();
 
 private:
     Ui::MainWindow *ui;

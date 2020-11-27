@@ -169,3 +169,8 @@ QSqlQueryModel * intervenat::trier4()
                       model->setHeaderData(4, Qt::Horizontal, QObject::tr("EMAIL"));
       return  model;
 }
+QSqlQueryModel * intervenat::combo_box1(){
+    QSqlQueryModel * model = new QSqlQueryModel();
+    model->setQuery("Select email from inter");
+    return model;
+}

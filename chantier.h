@@ -35,7 +35,7 @@ public :
     QSqlQueryModel * afficher();
     bool modifier();
     QSqlQueryModel * combo_box();
-    QSqlQueryModel * combo_box1();
+
     bool supprimer(int);
     QSqlQueryModel * chercher(const QString &);
     QSqlQueryModel * chercherbug(const QString &);
