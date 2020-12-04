@@ -47,7 +47,7 @@ background:   qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
                                  stop: 0.5#4399fe, stop: 1.0#1b83fe);
 border-radius:20px;
 border-radius:15px;
-border: 1px solid white;
+border: none;
 
 }
 
@@ -57,8 +57,8 @@ QPushButton:hover{
 background:   qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
                                  stop: 0 #1b83fe, stop: 0.4 #4399fe,
                                  stop: 0.5 #5da7fe, stop: 1.0 #77b5fe);
-color:white;
 
+color:white;
 }</string>
   </property>
   <widget class="QLineEdit" name="lineEdit_adresse">
@@ -69,6 +69,9 @@ color:white;
      <width>531</width>
      <height>22</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"> border-radius: 10px;</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_24">
@@ -101,6 +104,9 @@ color:white;
      <height>21</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true"> border-radius: 10px;</string>
+   </property>
   </widget>
   <widget class="QFrame" name="frame_12">
    <property name="geometry">
@@ -130,6 +136,7 @@ color:white;
      <string notr="true">QComboBox{
 border:none;
 border-bottom:1px solid #2d3436;
+ border-radius: 10px;
 }
 QComboBox::hover{
 background: rgba(119,181,254,0.5);
@@ -144,6 +151,9 @@ background: rgba(119,181,254,0.5);
       <width>531</width>
       <height>151</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
     </property>
    </widget>
   </widget>

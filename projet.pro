@@ -1,7 +1,7 @@
-QT       += core gui sql printsupport
+QT       += core gui sql printsupport charts
 QT       +=multimedia
-QT       += core
 QT       += network
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
@@ -28,7 +28,9 @@ SOURCES += \
     mailing/quotedprintable.cpp \
     mailing/smtpclient.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    parking.cpp \
+    stat.cpp
 
 HEADERS += \
     chantier.h \
@@ -49,7 +51,9 @@ HEADERS += \
     mailing/quotedprintable.h \
     mailing/smtpclient.h \
     mailing/smtpexports.h \
-    mainwindow.h
+    mainwindow.h \
+    parking.h \
+    stat.h
 
 FORMS += \
     dialog.ui \

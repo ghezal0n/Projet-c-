@@ -5,6 +5,9 @@
 #include <QMainWindow>
 #include "QMediaPlayer"
 #include "QMediaPlaylist"
+#include "parking.h"
+#include <QVBoxLayout>
+#include "stat.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -19,6 +22,7 @@ public:
     void display_listes();
     void playaudio();
     void playaudio1();
+    void refresh_stat();
     intervenat gettmp(){return tmp_inter;}
 
 
@@ -79,12 +83,33 @@ private slots:
 
     void on_pushButton_11_clicked();
 
+    void on_pushButton_12_clicked();
+
+    void on_pushButton_13_clicked();
+
+    void on_modifierchantier_6_clicked();
+
+    void on_pushButton_21_clicked();
+    void on_pb_ok1_5_clicked();
+void on_comboBox_7_activated(const QString &arg1);
+void on_pushButton_22_toggled(bool checked);
+void on_tabcha_2_activated(const QModelIndex &index);
+
+    void on_supprimerchantier_5_clicked();
+
+
+
+    void on_comboBox_stat_type_currentTextChanged();
+
 private:
     Ui::MainWindow *ui;
     chantier tmp_chantier;
     intervenat tmp_inter;
     QMediaPlaylist* music1;
     QMediaPlayer* music;
+    parking tmp_parking;
+    QVBoxLayout* mainLayout;
+    Stat s;
 };
 #endif // MAINWINDOW_H
 

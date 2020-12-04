@@ -18,6 +18,24 @@
 #include "dialog.h"
 #include <QtPrintSupport>
 #include <QPrintDialog>
+#include <QGraphicsView>
+#include "parking.h"
+#include <QVBoxLayout>
+#include "stat.h"
+#include <QtCharts>
+#include <QtWidgets/QMainWindow>
+#include <QtCharts/QChartView>
+#include <QtCharts/QBarSeries>
+#include <QtCharts/QBarSet>
+#include <QtCharts/QLineSeries>
+#include <QtCharts/QLegend>
+#include <QtCharts/QBarCategoryAxis>
+#include <QtCharts/QValueAxis>
+#include <QStandardItemModel>
+#include <QtCharts>
+#include <QChartView>
+#include <QPieSeries>
+#include <QPieSlice>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -47,6 +65,8 @@ MainWindow::MainWindow(QWidget *parent) :
     /*  ******************tabs*******************  */
     ui->tabchantier->setModel(tmp_chantier.afficher());
     ui->tabcha->setModel(tmp_inter.afficher());
+    ui->tabcha_2->setModel(tmp_parking.afficher());
+
     /*  ************************************************  */
     music1 =new QMediaPlaylist();
     music1->addMedia(QUrl("qrc:/images/backgmusic.mp3"));
@@ -62,6 +82,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pushButton_6->setIcon((QIcon(":/images/refresh1.png")));
     ui->pushButton_6->setIconSize(ui->pushButton_6->size());
     ui->pushButton_6->setCheckable(true);
+    ui->pushButton_22->setIcon((QIcon(":/images/refresh1.png")));
+    ui->pushButton_22->setIconSize(ui->pushButton_22->size());
+    ui->pushButton_22->setCheckable(true);
     /*  **************recher*******************  */
     ui->pb_ok1->setIcon((QIcon(":/images/4.png")));
     ui->pb_ok1->setIconSize(ui->pb_ok1->size());
@@ -77,6 +100,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pushButton_9->setIcon((QIcon(":/images/60578.png")));
     ui->pushButton_9->setIconSize(ui->pushButton_9->size());
 
+    mainLayout=new QVBoxLayout ;
+    mainLayout->addWidget(s.Preparechart());
+    ui->widget->setLayout(mainLayout);
+
+
+
+
+
+
 
 }
 
@@ -84,18 +116,35 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete music;
+    delete mainLayout;
 }
 void MainWindow::display_listes()
 {
     ui->tabchantier->setModel(tmp_chantier.afficher());
     ui->id_chmo->setModel(tmp_chantier.combo_box());
-   // ui->lineeditid->setModel(tmp_chantier.combo_box());
     ui->tabcha->setModel(tmp_inter.afficher());
     ui->comboBox_2->setModel(tmp_inter.combo_box());
-
-
+    ui->tabcha_2->setModel(tmp_parking.afficher());
+    ui->comboBox_6->setModel(tmp_parking.combo_box());
+    ui->widget->setLayout(mainLayout);
+    refresh_stat();
 }
-
+void MainWindow::refresh_stat()
+{
+    if ( ui->widget->layout() != NULL )
+    {
+    QLayoutItem* item;
+    while ( ( item = ui->widget->layout()->takeAt( 0 ) ) != NULL )
+    {
+    delete item->widget();
+    delete item;
+    }
+    delete ui->widget->layout();
+    }
+    mainLayout = new QVBoxLayout;
+    mainLayout->addWidget(s.Preparechart());
+    ui->widget->setLayout(mainLayout);
+}
 void MainWindow::playaudio()
 {
 
@@ -369,7 +418,7 @@ void MainWindow::on_supprimerchantier_3_clicked()
             playaudio();
             display_listes();
             QMessageBox::information(nullptr, QObject::tr("Supprimer un intervenant"),
-                        QObject::tr("Client supprimé.\n"
+                        QObject::tr("intervenant supprimé.\n"
                                     "Click Ok to exit."), QMessageBox::Cancel);
 
         }
@@ -686,6 +735,8 @@ music->setMedia(QUrl("qrc:/images/Flash instant, printer, printing sound effect 
 
 
 
+
+
         QString num1 = ui->lineEdit_7->text();
         int num = ui->lineEdit_7->text().toInt();
 
@@ -718,6 +769,7 @@ music->setMedia(QUrl("qrc:/images/Flash instant, printer, printing sound effect 
         }
               QPrinter printer(QPrinter::HighResolution);
                   printer.setPageSize(QPrinter::A4);
+QGraphicsView a;
 
                  QPrintDialog *dialog = new QPrintDialog(&printer);
                   if (dialog->exec() == QDialog::Accepted)
@@ -728,9 +780,9 @@ music->setMedia(QUrl("qrc:/images/Flash instant, printer, printing sound effect 
                                   int iHeight = printer.height();
                                   QPixmap pxPic;
                                   pxPic.load(":/images/background.jpg","JPG");
-                                  QSize s(iWidth/3, iHeight/5);
-                                  QPixmap pxScaledPic = pxPic.scaled(s, Qt::KeepAspectRatio, Qt::FastTransformation);
-                                  painter.drawPixmap(3700, iYPos, pxScaledPic.width(), pxScaledPic.height(), pxScaledPic);
+                                 QSize s(iWidth/1, iHeight/1);
+                                  QPixmap pxScaledPic = pxPic.scaled(s, Qt::IgnoreAspectRatio, Qt::FastTransformation);
+                                  painter.drawPixmap(0, iYPos, pxScaledPic.width(), pxScaledPic.height(), pxScaledPic);
                                   iYPos += pxScaledPic.height() + 250;
                                   QFont f;
                                       f.setPointSize(20);
@@ -766,4 +818,213 @@ music->setMedia(QUrl("qrc:/images/Flash instant, printer, printing sound effect 
                         QObject::tr("Erreur !.\n"
                                     "Veuillez selectionner un id d'un chantier à imprimer .\n"
                                     "Click Cancel to exit."), QMessageBox::Cancel);}
+}
+
+void MainWindow::on_pushButton_12_clicked()
+{
+    int i=ui->lineeditid_2->text().toInt();
+    QString p=ui->lineEditadres_2->text();
+    int k=ui->lineEditsurface_2->text().toInt();
+    QString s=ui->comboBox_3->currentText();
+
+    parking c(i,p,k,s);
+
+
+    if ((i!='\0')&&(p!='\0')&&(k!='\0'))
+    {
+
+    bool test = c.ajouter();
+    if(test)
+
+    {
+        display_listes();
+        playaudio();
+        QMessageBox::information(nullptr,("Ajout parking"),("parking ajouté"));}
+else
+     {QMessageBox::warning(nullptr,("Ajout parking"),("parking non ajouté"));}
+    }
+
+    else QMessageBox::warning(nullptr,("Ajout parking"),("pas de données"));
+}
+
+void MainWindow::on_pushButton_13_clicked()
+{
+    playaudio();
+   ui->lineeditid_2->clear();
+   ui->lineEditadres_2->clear();
+   ui->lineEditsurface_2->clear();
+}
+
+void MainWindow::on_modifierchantier_6_clicked()
+{
+    int i=ui->comboBox_6->currentText().toInt();
+    QString p=ui->lineEditadres_5->text();
+    int l=ui->lineEditsurface_5->text().toInt();
+    QString s=ui->comboBox_5->currentText();
+
+    parking c(i,p,l,s);
+    bool test=c.modifier();
+    if(test)
+    {    playaudio();
+         display_listes();
+        QMessageBox::information(nullptr, QObject::tr("Modifier un parking"),
+                    QObject::tr("un parking a été modifier.\n"
+                                "Cliquez sur Ok pour continuer."), QMessageBox::Ok);
+    }
+    else
+
+       QMessageBox::critical(nullptr, QObject::tr("Modifier un parking"),
+                   QObject::tr("Erreur!\n"
+                               "Erreur de modification .\n Veuillez réessayer."), QMessageBox::Ok);
+}
+
+void MainWindow::on_pushButton_21_clicked()
+{
+    playaudio();
+    ui->comboBox_6->clear();
+    ui->lineEditadres_5->clear();
+    ui->lineEditsurface_5->clear();
+}
+
+void MainWindow::on_supprimerchantier_5_clicked()
+{
+    int a=ui->lineEdit_24->text().toInt();
+   bool test=tmp_parking.supprimer(a);
+   if (a!='\0'){
+QMessageBox::StandardButton reponse = QMessageBox::question(this,"suppression","confirmer la suppression",QMessageBox::Yes | QMessageBox::No);
+if (reponse == QMessageBox::Yes)
+{
+
+    if(test)
+    {
+        playaudio();
+        display_listes();
+        QMessageBox::information(nullptr, QObject::tr("Supprimer un parking"),
+                    QObject::tr("parking supprimé.\n"
+                                "Click Ok to exit."), QMessageBox::Cancel);
+
+    }
+    else{
+        QMessageBox::critical(nullptr, QObject::tr("Supprimer un parking"),
+                    QObject::tr("Erreur !.\n"
+                                "Click Cancel to exit."), QMessageBox::Cancel);
+    playaudio();}
+
+}
+else  return;}
+
+}
+
+void MainWindow::on_pb_ok1_5_clicked()
+{
+    if (ui->radioButton_21->isChecked())
+    {
+        QString type= ui->lineEdit_22->text() ;
+        ui->tabcha_2->setModel(tmp_parking.chercheradresse(type));
+        playaudio();
+    }
+
+    if (ui->radioButton_22->isChecked())
+    {
+        QString type= ui->lineEdit_22->text() ;
+        ui->tabcha_2->setModel(tmp_parking.chercherid(type));
+        playaudio();
+    }
+
+
+    if (!(ui->radioButton_21->isChecked())&&!(ui->radioButton_22->isChecked()))
+           { playaudio();
+        QMessageBox::critical(nullptr, QObject::tr("cherche échoué"),
+                               QObject::tr("aaaaa\n"
+                                           "Click Cancel to exit."), QMessageBox::Cancel);
+    }
+}
+
+void MainWindow::on_comboBox_7_activated(const QString &arg1)
+{
+    if(arg1=="ID")
+       {
+        if (ui->radioButton_24->isChecked())
+        {
+            ui->tabcha_2->setModel(tmp_parking.trier_3());
+            playaudio();
+        }
+        if (ui->radioButton_25->isChecked())
+        {
+            ui->tabcha_2->setModel(tmp_parking.trier_4());
+            playaudio();
+        }
+       }
+    if(arg1=="Nombre de places de parking")
+       {
+        if (ui->radioButton_24->isChecked())
+        {
+            ui->tabcha_2->setModel(tmp_parking.trier_1());
+            playaudio();
+        }
+        if (ui->radioButton_25->isChecked())
+        {
+            ui->tabcha_2->setModel(tmp_parking.trier_2());
+            playaudio();
+        }
+       }
+}
+
+void MainWindow::on_pushButton_22_toggled(bool checked)
+{
+    if (checked){
+        ui->pushButton_22->setIcon((QIcon(":/images/refresh2.png")));
+        ui->pushButton_22->setIconSize(ui->pushButton_22->size());
+        display_listes();
+        ui->lineEdit_24->clear();
+        ui->lineEdit_22->clear();
+        playaudio();
+
+    }
+   else  {
+        ui->pushButton_22->setIcon((QIcon(":/images/refresh1.png")));
+        ui->pushButton_22->setIconSize(ui->pushButton_22->size());
+        display_listes();
+        ui->lineEdit_24->clear();
+        ui->lineEdit_22->clear();
+        playaudio();
+}
+}
+
+void MainWindow::on_tabcha_2_activated(const QModelIndex &index)
+{
+
+    QString a=ui->tabcha_2->model()->data(index).toString();
+    QSqlQuery query;
+    query.prepare("select * from parking where ID=:id");
+    query.bindValue(":id", a);
+
+    if (query.exec())
+    {
+
+        while (query.next()) {
+            playaudio();
+            ui->lineEdit_24->setText(query.value(0).toString());
+            ui->comboBox_6->setCurrentText(query.value(0).toString());
+            ui->lineEditadres_5->setText(query.value(1).toString());
+            ui->lineEditsurface_5->setText(query.value(2).toString());
+
+
+
+        }
+    }
+}
+
+
+
+
+
+
+
+void MainWindow::on_comboBox_stat_type_currentTextChanged()
+{
+
+      /*  mainLayout=new QVBoxLayout ;
+        mainLayout->addWidget(s.Preparechart(ui->comboBox12->currentText()));
+        ui->widget->setLayout(mainLayout);*/
 }

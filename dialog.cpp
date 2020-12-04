@@ -62,7 +62,7 @@ void Dialog::on_pushButton_envoyer_clicked()
         smtp.quit();
 }
 
-void Dialog::on_comboBox_5_activated(const QString &arg1)
+void Dialog::on_comboBox_5_activated(const QString &)
 {
     QString a=ui->comboBox_5->currentText();
       QSqlQuery query;
