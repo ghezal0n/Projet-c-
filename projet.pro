@@ -14,6 +14,9 @@ SOURCES += \
     chantier.cpp \
     connexion.cpp \
     dialog.cpp \
+    employe.cpp \
+    equipements.cpp \
+    fournisseur.cpp \
     intervenant.cpp \
     mailing/emailaddress.cpp \
     mailing/mimeattachment.cpp \
@@ -30,12 +33,16 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     parking.cpp \
+    poste.cpp \
     stat.cpp
 
 HEADERS += \
     chantier.h \
     connexion.h \
     dialog.h \
+    employe.h \
+    equipements.h \
+    fournisseur.h \
     intervenant.h \
     mailing/SmtpMime \
     mailing/emailaddress.h \
@@ -53,6 +60,7 @@ HEADERS += \
     mailing/smtpexports.h \
     mainwindow.h \
     parking.h \
+    poste.h \
     stat.h
 
 FORMS += \
@@ -68,5 +76,11 @@ RESOURCES += \
     images.qrc
 
 DISTFILES += \
+    images/62263273-concept-de-l-ingénierie-des-outils-de-construction-sur-une-illustration-blanche-background-3d.jpg \
+    images/Achat-fourniture-bureau.jpg \
+    images/La-transformation-digitale-de-la-relation-client-fournisseur-01-1030x399.jpg \
+    images/Sans titre-1.jpg \
+    images/co.PNG \
+    images/construisez-une-relation-fournisseur-solide.jpg \
     images/find_files_on_linux.jpg \
     images/istockphoto-507065413-170667a.jpg

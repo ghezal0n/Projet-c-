@@ -15,7 +15,10 @@ int main(int argc, char *argv[])
     bool test=c.createconnect();
     if(test)
     {w.show();
+        w.refresh();
         w.display_listes();
+
+        w.refreshma();
         QMessageBox::information(nullptr, QObject::tr("database is open"),
                     QObject::tr("connection successful.\n"
                                 "Click Cancel to exit."), QMessageBox::Cancel);

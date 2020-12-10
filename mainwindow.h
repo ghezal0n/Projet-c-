@@ -8,6 +8,10 @@
 #include "parking.h"
 #include <QVBoxLayout>
 #include "stat.h"
+#include "employe.h"
+#include "poste.h"
+#include "fournisseur.h"
+#include "equipements.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -24,6 +28,10 @@ public:
     void playaudio1();
     void refresh_stat();
     intervenat gettmp(){return tmp_inter;}
+    Employe tmpemploye;
+    poste tmpposte ;
+    void refresh();
+    void refreshma();
 
 
 private slots:
@@ -77,6 +85,21 @@ private slots:
 
     void on_pushButton_9_clicked();
 
+    void initialiser_formulaire();
+
+    //void on_pb_ok1_clicked();
+
+    //void on_comboBox_5_activated(const QString &arg1);
+
+    bool verifier_formulaire_ajout_employe();
+
+bool verifier_formulaire_ajout_poste();
+
+
+
+
+
+
 
 
     void on_pushButton_10_clicked();
@@ -101,6 +124,75 @@ void on_tabcha_2_activated(const QModelIndex &index);
 
     void on_comboBox_stat_type_currentTextChanged();
 
+
+
+
+    void on_pushButton_14_clicked();
+
+    void on_pushButton_15_clicked();
+
+    void on_supprimeremploye_clicked();
+
+    void on_pushButton_18_clicked();
+
+    void on_supprimerposte_2_clicked();
+
+    void on_modifierchantier_4_clicked();
+
+    void on_modifierchantier_2_clicked();
+
+    void on_pb_ok1_3_clicked();
+
+    void on_pb_ok1_4_clicked();
+
+    void on_comboBox_13_activated(const QString &arg1);
+
+    void on_checkBox_2_clicked();
+
+    void on_comboBox_11_activated(const QString &arg1);
+
+    void on_checkBox_clicked();
+
+    void on_comboBox_12_activated(const QString &arg1);
+
+    void on_comboBox_8_activated(const QString &arg1);
+
+    void on_pushButton_16_clicked();
+
+    void on_pushButton_17_clicked();
+
+    void on_comboBox_6_activated(const QString &arg1);
+
+    void on_pushButton_19_clicked();
+
+    void on_comboBox_15_activated(const QString &arg1);
+
+    void on_pb_ok1_6_clicked();
+
+    void on_modifier_clicked();
+
+    void on_supprimer_clicked();
+
+    void on_pushButton_23_clicked();
+
+    void on_comboBox_17_activated(const QString &arg1);
+
+    void on_chercher_equi_clicked();
+
+    void on_modifier_equi_clicked();
+
+    void on_supprimer_equi_clicked();
+
+    void on_comboBox_14_activated(const QString &arg1);
+
+    void on_comboBox_16_activated(const QString &arg1);
+
+    void on_tabWidget_11_tabBarClicked(int index);
+
+    void on_pushButton_20_clicked();
+
+    void on_actualiser_clicked();
+
 private:
     Ui::MainWindow *ui;
     chantier tmp_chantier;
@@ -110,6 +202,8 @@ private:
     parking tmp_parking;
     QVBoxLayout* mainLayout;
     Stat s;
+    fournisseur f;
+    equipements e1;
 };
 #endif // MAINWINDOW_H
 

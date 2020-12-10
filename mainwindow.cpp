@@ -36,6 +36,8 @@
 #include <QChartView>
 #include <QPieSeries>
 #include <QPieSlice>
+#include "fournisseur.h"
+#include "equipements.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -103,8 +105,13 @@ MainWindow::MainWindow(QWidget *parent) :
     mainLayout=new QVBoxLayout ;
     mainLayout->addWidget(s.Preparechart());
     ui->widget->setLayout(mainLayout);
+    refresh();
+    ui->verticalLayout_3->addWidget(tmpemploye.statistique());
+    ui->verticalLayout_8->addWidget(tmpemploye.statistique2());//afficher stat (vertciallayout)
 
-
+    ui->tableView->setModel(f.afficher());
+    ui->tableView_2->setModel(e1.afficher());
+    ui->comboBox_14->setModel(f.combo_box());
 
 
 
@@ -1016,15 +1023,738 @@ void MainWindow::on_tabcha_2_activated(const QModelIndex &index)
 }
 
 
-
-
-
-
-
 void MainWindow::on_comboBox_stat_type_currentTextChanged()
 {
 
       /*  mainLayout=new QVBoxLayout ;
         mainLayout->addWidget(s.Preparechart(ui->comboBox12->currentText()));
         ui->widget->setLayout(mainLayout);*/
+}
+void MainWindow::on_comboBox_6_activated(const QString &)
+{
+    QString a=ui->comboBox_6->currentText();
+     QSqlQuery query;
+     query.prepare("select * from parking where ID=:id");
+     query.bindValue(":id", a);
+
+     if (query.exec())
+     {
+
+         while (query.next()) {
+
+
+              playaudio();
+              ui->lineEdit_24->setText(query.value(0).toString());
+              ui->comboBox_6->setCurrentText(query.value(0).toString());
+              ui->lineEditadres_5->setText(query.value(1).toString());
+              ui->lineEditsurface_5->setText(query.value(2).toString());
+
+         }
+     }
+}
+//************************mariem**********************************
+//**************************************************************
+//****************************************************************
+
+bool MainWindow::verifier_formulaire_ajout_employe(){//condition d'ajout
+
+
+    if ((ui->lineEditid->text()!="")&&(ui->lineEditnom->text()!="")&&(ui->lineEditprenom->text()!="")&&(ui->lineEdittelephone->text()!="")&&(ui->dateEditddn->text()!="")){
+        return true;
+    }
+    else return false;
+}
+
+bool MainWindow::verifier_formulaire_ajout_poste(){
+
+
+    if ((ui->lineEditid_5->text()!="")&&(ui->lineEditgrade->text()!="")&&(ui->lineEditavantage->text()!="")&&(ui->lineEdithoraire->text()!="")&&(ui->lineEditsalaire->text()!="")){
+        return true;
+    }
+    else return false;
+}
+
+
+void MainWindow::initialiser_formulaire(){
+
+    /*ui->lineEditid->clear();
+    ui->lineEditnom->clear();
+    ui->lineEditprenom->clear();
+    ui->comboBox_post->clear();
+    ui->lineEdittelephone->clear();
+    ui->dateEditddn->clear();
+
+    ui->comboBox_5->clear();
+    ui->lineEditadres_2->clear();
+    ui->lineEditprenom_2->clear();
+    ui->lineEdittel->clear();
+    ui->dateEdit_2->clear();
+
+    ui->lineEditid_5->clear();
+    ui->lineEditgrade->clear();
+    ui->lineEditavantage->clear();
+    ui->lineEdithoraire->clear();
+    ui->lineEditsalaire->clear();
+
+    ui->comboBox_4->clear();
+    ui->lineEditadres_3->clear();
+    ui->lineEditsurface_4->clear();
+    ui->lineEditbudget_4->clear();
+    ui->lineEditbudget_5->clear();*/
+
+}
+
+void MainWindow::refresh(){
+    ui->tableViewEmploye->setModel(tmpemploye.afficher());
+    ui->tableViewposte->setModel(tmpposte.afficher());
+    ui->comboBox_12->setModel(tmpposte.afficherid());
+    ui->comboBox_8->setModel(tmpemploye.afficherid());
+
+     ui->comboBox_post->setModel(tmpposte.affichergrade());
+     ui->comboBox_10->setModel(tmpposte.affichergrade());
+
+    ui->comboBox_9->setModel(tmpemploye.afficherid());
+    initialiser_formulaire();
+
+}
+void MainWindow::on_pushButton_14_clicked()
+{
+    QString id=ui->lineEditid->text();
+    QString nom=ui->lineEditnom->text();
+    QString prenom=ui->lineEditprenom->text();
+    QString post = ui->comboBox_post->currentText();
+    QString telephone=ui->lineEdittelephone->text();
+    QString date=ui->dateEditddn->text();
+
+    qDebug()<<verifier_formulaire_ajout_employe();
+
+
+    if (verifier_formulaire_ajout_employe()==true){
+        Employe e(id,nom,prenom,post,telephone,date);
+
+        bool test= e.ajouter();
+        QMessageBox::information(nullptr, QObject::tr("Ajouter un employe"),
+                          QObject::tr("employe ajouté.\n"
+                                      "Click Cancel to exit."), QMessageBox::Cancel);
+        refresh();
+    }
+    else{
+        QMessageBox::critical(nullptr, QObject::tr("Ajouter un employe"),
+                    QObject::tr("Erreur !.\n"
+                             "Click Cancel to exit."), QMessageBox::Cancel);
+    }
+}
+
+void MainWindow::on_pushButton_15_clicked()
+{
+    QString strStream;
+    QTextStream out(&strStream);
+    QString id = ui->comboBox_9->currentText();
+    QVector <QString> information=tmpemploye.getinforamation(id);
+
+
+    out <<  "<html>\n"
+        "<head>\n"
+        "<meta Content=\"Text/html; charset=Windows-1251\">\n"
+        <<  QString("<title>%1</title>\n").arg("employe")
+        <<  "</head>\n"
+        "<body  bgcolor=#ffffff link=#5000A0>\n";
+            out << "<h1 style='color: red;text-align: center;'>Fiche de Paie </h1>";
+            out << "<span style='text-align: center; display: inline;'><h2>nom:"<<QString("  %1 </h2></span>").arg(information.at(0));
+            out << "<span style='text-align: center;'><h2>prenom:</h2>" <<QString("<h3>%1</p></h3>").arg(information.at(1));
+            out << "<span style='text-align: center;'><h2>grade:</h2>" <<QString("<h3>%1</p></h3>").arg(information.at(2));
+            out << "<span style='text-align: center;'><h2>salaire:</h2>" <<QString("<h3>%1</p></h3>").arg(information.at(3));
+
+        "</body>\n"
+        "</html>\n";
+
+    QTextDocument *document = new QTextDocument();
+        document->setHtml(strStream);
+
+        QPrinter printer(QPrinter::HighResolution);
+                printer.setPageSize(QPrinter::A4);
+                QPrintDialog *dialog = new QPrintDialog(&printer,this);
+                 if (dialog->exec() == QDialog::Accepted)
+                    {
+                        QPainter painter(&printer);
+                        painter.begin(&printer);
+                        quint32 iYPos = 0;
+                        quint32 iWidth = printer.width();
+                        quint32 iHeight = printer.height();
+                        QPixmap pxPic,pxPic2,pxPic3;
+                        pxPic.load("://perso.png", "PNG");
+                        pxPic2.load("://Maryam.jpg", "JPG");
+                        pxPic3.load("://signature.png", "PNG");
+
+                        const QImage image2("://Maryam.jpg");
+                         const QPoint imageCoordinates(3500,6000);
+
+                         const QImage image3("://signature.png");
+                          const QPoint imageCoordinates2(3500,5800);
+
+                        QSize s(iWidth/3, iHeight/5);
+                        QPixmap pxScaledPic = pxPic.scaled(s, Qt::KeepAspectRatio, Qt::FastTransformation);
+                        painter.drawPixmap(3500, iYPos, pxScaledPic.width(), pxScaledPic.height(), pxScaledPic);
+                        iYPos -= pxScaledPic.height() + 1000;
+
+
+
+                        QFont f;
+                        f.setPointSize(20);
+                        f.setBold(true);
+                        f.setItalic(true);
+                        painter.setBrush(QColor(50,205,50));
+                        painter.setFont(f);
+                        painter.drawText(1700,400,"fiche de paie");
+                        painter.drawText(100, 1000, "Nom:");
+                        painter.drawText(1000, 1000,information.at(0));
+                        painter.drawText(100, 1400, "Prenom: ");
+                        painter.drawText(1000, 1400,information.at(0));
+                        painter.drawText(100, 1700, "Poste: ");
+                        painter.drawText(1000, 1700,information.at(2));
+                        painter.drawText(100, 2000, "Salaire: ");
+                        painter.drawText(1000, 2000,information.at(3));
+                        painter.drawText(1500, 2000, "DT ");
+
+                        painter.drawImage(imageCoordinates, image2);
+                        painter.drawImage(imageCoordinates2, image3);
+
+                        //pxPic.load("C:/Users/MEGA-PC/Downloads/mohsen/mariem/projet/perso.png", "PNG");
+                       }
+}
+
+void MainWindow::on_supprimeremploye_clicked()
+{
+    QString ide=ui->lineEdit_21->text();
+
+    Employe e;
+
+    bool test= e.supprimer(ide);
+    refresh();
+    if (test==1){
+        QMessageBox::information(nullptr, QObject::tr("supprimer employe"),
+                          QObject::tr("employe supprime.\n"
+                                      "Click Cancel to exit."), QMessageBox::Cancel);
+    }else{
+        QMessageBox::critical(nullptr, QObject::tr("supprimer employe"),
+                    QObject::tr("Erreur !.\n"
+                             "Click Cancel to exit."), QMessageBox::Cancel);
+    }
+
+}
+
+void MainWindow::on_pushButton_18_clicked()
+{
+    QString id=ui->lineEditid_5->text();
+    QString grade=ui->lineEditgrade->text();
+    QString avantage=ui->lineEditavantage->text();
+    QString horaire = ui->lineEdithoraire->text();
+    QString salaire=ui->lineEditsalaire->text();
+    if(verifier_formulaire_ajout_poste()){
+         poste p(id,grade,avantage,horaire,salaire);
+         bool test= p.ajouter();
+         QMessageBox::information(nullptr, QObject::tr("Ajouterposte"),
+                           QObject::tr("poste ajouté.\n"
+                                       "Click Cancel to exit."), QMessageBox::Cancel);
+         refresh();
+    }
+    else{
+        QMessageBox::critical(nullptr, QObject::tr("Ajouter poste"),
+                    QObject::tr("Erreur !.\n"
+                             "Click Cancel to exit."), QMessageBox::Cancel);
+
+    }
+}
+
+void MainWindow::on_supprimerposte_2_clicked()
+{
+    QString idp=ui->lineEdit_26->text();
+
+    poste p;
+
+    bool test= p.supprimer(idp);
+    refresh();
+    if (test==1){
+        QMessageBox::information(nullptr, QObject::tr("Supprimer Poste"),
+                          QObject::tr("poste supprime.\n"
+                                      "Click Cancel to exit."), QMessageBox::Cancel);
+    }else{
+        QMessageBox::critical(nullptr, QObject::tr("Supprimer Poste"),
+                    QObject::tr("Erreur !.\n"
+                             "Click Cancel to exit."), QMessageBox::Cancel);
+    }
+}
+
+void MainWindow::on_modifierchantier_4_clicked()
+{
+    QString id=ui->comboBox_12->currentText();
+    QString grade=ui->lineEditadres_6->text();
+    QString avantage=ui->lineEditsurface_6->text();
+    QString horaire = ui->lineEditbudget_5->text();
+    QString salaire=ui->lineEditbudget_6->text();
+
+    poste p (id,grade,avantage,horaire,salaire);
+
+    bool test= p.modifier(id);
+     refresh();
+     if (test==1){
+         QMessageBox::information(nullptr, QObject::tr("Modifier Poste"),
+                           QObject::tr("poste modifié.\n"
+                                       "Click Cancel to exit."), QMessageBox::Cancel);
+     }else{
+         QMessageBox::critical(nullptr, QObject::tr("modifier Poste"),
+                     QObject::tr("Erreur !.\n"
+                              "Click Cancel to exit."), QMessageBox::Cancel);
+     }
+}
+
+void MainWindow::on_modifierchantier_2_clicked()
+{
+    QString id=ui->comboBox_8->currentText();
+    QString nom=ui->lineEditadres_3->text();
+    QString prenom= ui->lineEditprenom_2->text();
+    QString poste=ui->comboBox_10->currentText();
+    QString telephone=ui->lineEdittel->text();
+    QString date=ui->dateEdit_2->text();
+
+    Employe e (id,nom, prenom,poste,telephone,date);
+    bool test= e.modifier(id);
+    refresh();
+
+    if (test==1){
+        QMessageBox::information(nullptr, QObject::tr("Ajouter Poste"),
+                          QObject::tr("employe modifier.\n"
+                                      "Click Cancel to exit."), QMessageBox::Cancel);
+    }else{
+        QMessageBox::critical(nullptr, QObject::tr("Ajouter Poste"),
+                    QObject::tr("Erreur !.\n"
+                             "Click Cancel to exit."), QMessageBox::Cancel);
+    }
+}
+
+void MainWindow::on_pb_ok1_3_clicked()
+{
+    ui->tableViewEmploye->setModel(tmpemploye.recherche_id(ui->lineEdit_20->text()));
+}
+
+void MainWindow::on_pb_ok1_4_clicked()
+{
+    ui->tableViewposte->setModel(tmpposte.recherche(ui->lineEdit_25->text()));
+}
+
+void MainWindow::on_comboBox_13_activated(const QString &arg1)
+{
+    QString mode="DESC";
+    if (ui->checkBox_2->checkState()==false)
+        mode="ASC";
+    ui->tableViewposte->setModel(tmpposte.trier(ui->comboBox_13->currentText(),mode));
+}
+
+void MainWindow::on_checkBox_2_clicked()
+{
+    QString mode="DESC";
+    if (ui->checkBox_2->checkState()==false)
+        mode="ASC";
+    ui->tableViewposte->setModel(tmpposte.trier(ui->comboBox_13->currentText(),mode));
+}
+
+void MainWindow::on_comboBox_11_activated(const QString &arg1)
+{
+
+        QString mode="DESC";
+        if (ui->checkBox->checkState()==false)
+            mode="ASC";
+        ui->tableViewEmploye->setModel(tmpemploye.trier(ui->comboBox_11->currentText(),mode));
+
+}
+
+void MainWindow::on_checkBox_clicked()
+{
+    QString mode="DESC";
+    if (ui->checkBox->checkState()==false)
+        mode="ASC";
+    ui->tableViewEmploye->setModel(tmpemploye.trier(ui->comboBox_11->currentText(),mode));
+}
+
+void MainWindow::on_comboBox_12_activated(const QString &arg1)
+{
+    QString id=ui->comboBox_12->currentText();
+    QSqlQuery * query=tmpposte.recherche_id(id);
+    QString grade;
+    QString avantage;
+    QString horaire;
+    QString salaire;
+
+    if (query->next())
+      {
+        grade= query->value(1).toString();
+        ui->lineEditadres_6->setText(grade);
+        avantage= query->value(2).toString();
+        ui->lineEditsurface_6->setText(avantage);
+        horaire= query->value(3).toString();
+        ui->lineEditbudget_5->setText(horaire);
+        salaire= query->value(4).toString();
+        ui->lineEditbudget_6->setText(salaire);
+      }
+}
+
+void MainWindow::on_comboBox_8_activated(const QString &arg1)
+{
+    QString id=ui->comboBox_8->currentText();
+    QSqlQuery * query=tmpemploye.recherche_id2(id);
+    QString nom;
+    QString prenom;
+    QString poste;
+    QString telephone;
+
+
+    if (query->next())
+      {
+        nom= query->value(1).toString();
+        ui->lineEditadres_3->setText(nom);
+        prenom= query->value(2).toString();
+        ui->lineEditprenom_2->setText(prenom);
+        poste= query->value(3).toString();
+        ui->comboBox_10->setCurrentText(poste);
+        telephone= query->value(4).toString();
+        ui->lineEdittel->setText(telephone);
+      }
+}
+
+void MainWindow::on_pushButton_16_clicked()
+{
+    int i= ui->verticalLayout_3->count();
+     if (i==1){
+         delete ui->verticalLayout_3->itemAt(0)->widget();
+         ui->verticalLayout_3->addWidget(tmpemploye.statistique());
+     }else{
+         ui->verticalLayout_3->addWidget(tmpemploye.statistique());
+     }
+}
+
+void MainWindow::on_pushButton_17_clicked()
+{
+   int i= ui->verticalLayout_8->count();
+     if (i==1){
+         delete ui->verticalLayout_8->itemAt(0)->widget();
+         ui->verticalLayout_8->addWidget(tmpemploye.statistique2());
+     }else{
+         ui->verticalLayout_8->addWidget(tmpemploye.statistique2());
+     }
+}
+
+//**********************mahdi********************
+//*********************************************
+//******************************************
+
+void MainWindow::on_pushButton_19_clicked()
+{
+    int a=ui->lineEdit1->text().toInt();
+    QString b=ui->lineEdit2->text();
+    QString c=ui->lineEdit3->text();
+    int d=ui->lineEdit4->text().toInt();
+    QString e=ui->lineEdit5->text();
+
+    fournisseur f(a,b,c,d,e);
+
+       if ((a!='\0')&&(b!='\0')&&(c!='\0')&&(d!='\0')&&(e!='\0'))
+       {
+
+       bool test = f.ajouter();
+       if(test)
+
+       {
+           QMessageBox::information(nullptr,("Ajout fournisseur"),("fournisseur ajouté"));
+           ui->tableView->setModel(f.afficher());
+       }
+   else
+       {QMessageBox::warning(nullptr,("Ajout fournisseur"),("fournisseur non ajouter"));
+       }
+       }
+       else QMessageBox::warning(nullptr,("Ajout fournisseur"),("pas de données"));
+}
+
+void MainWindow::on_comboBox_15_activated(const QString &arg1)
+{
+    // ui->tableView->setModel(f.tri_nom());
+     //qDebug()<<arg1;
+         if(arg1=="ID")
+            {
+                 ui->tableView->setModel(f.tri_id());
+            }
+
+         if(arg1=="Nom")
+            {
+                 ui->tableView->setModel(f.tri_nom());
+            }
+
+         if(arg1=="type")
+            {
+                 ui->tableView->setModel(f.tri_type());
+            }
+         if(arg1=="numero")
+                    {
+                         ui->tableView->setModel(f.tri_numero());
+                    }
+         if(arg1=="adresse")
+            {
+                 ui->tableView->setModel(f.tri_adresse());
+            }
+}
+
+void MainWindow::on_pb_ok1_6_clicked()
+{
+    QString a= ui->lineEdit_28->text();
+    ui->tableView->setModel(f.recherche_id(a));
+}
+
+void MainWindow::on_modifier_clicked()
+{
+    int a=ui->comboBox_14->currentText().toInt();
+    QString b=ui->lineEdit_27->text();
+    QString c=ui->lineEdit_33->text();
+    int d=ui->lineEdit_44->text().toInt();
+    QString e=ui->lineEdit_55->text();
+
+    fournisseur f(a,b,c,d,e);
+
+    //   if ((a!='\0')&&(b!='\0')&&(c!='\0')&&(d!='\0')&&(e!='\0'))
+       {
+
+       bool test = f.modifier();
+       if(test)
+
+       {
+           QMessageBox::information(nullptr,("modifier fournisseur"),("fournisseur modifié"));
+           ui->tableView->setModel(f.afficher());
+       }
+   else
+       {QMessageBox::warning(nullptr,("modifier fournisseur"),("fournisseur non modifier"));
+       }
+       }
+//       else QMessageBox::warning(nullptr,("modifier fournisseur"),("pas de données"));
+}
+
+void MainWindow::on_supprimer_clicked()
+{
+    int a=ui->lineEdit_sup->text().toInt();
+     bool test=f.supprimer(a);
+     if (a!='\0'){
+    QMessageBox::StandardButton supprimer = QMessageBox::question(this,"suppression","confirmer la suppression !!!",QMessageBox::Yes|QMessageBox::No);
+     if (supprimer == QMessageBox::Yes)  {
+         if(test){
+
+                 QMessageBox::information(nullptr, QObject::tr("Supprimer un fournisseur"),
+                              QObject::tr("fournisseur supprimé.\n"
+                                          "Click OK to exit."), QMessageBox::Cancel);
+            }
+            else
+                QMessageBox::critical(nullptr, QObject::tr("supprimer un fournisseur"),
+                            QObject::tr("Erreur !.\n"
+                                        "Veuillez saisir un idCon pour supprimer un fournisseur .\n"
+                                        "Click Cancel to exit."), QMessageBox::Cancel);
+ }
+   else return;
+ }
+}
+
+void MainWindow::on_pushButton_23_clicked()
+{
+    QString a1=ui->lineEdit_e1->text();
+    QString b2=ui->lineEdit_e2->text();
+    int c3=ui->lineEdit_e3->text().toInt();
+    QDate d3=ui->dateEdit_3->date();
+    float e4=ui->lineEdit_e4->text().toFloat();
+
+    equipements e1(a1,b2,c3,d3,e4);
+
+       if ((a1!='\0')&&(b2!='\0')&&(c3!='\0')&&(e4!='\0'))
+       {
+
+       bool test = e1.ajouter();
+       if(test)
+
+       {
+           QMessageBox::information(nullptr,("Ajout equipement"),("equipement ajouté"));
+           ui->tableView_2->setModel(e1.afficher());
+       }
+   else
+       {QMessageBox::warning(nullptr,("Ajout equipement"),("equipement non ajouter"));
+       }
+       }
+        else QMessageBox::warning(nullptr,("Ajout equipement"),("pas de données"));
+}
+
+void MainWindow::on_comboBox_17_activated(const QString &arg1)
+{
+    // qDebug()<<arg1;
+     if(arg1=="Code")
+        {
+             ui->tableView_2->setModel(e1.tri_code());
+        }
+
+     if(arg1=="Quantite")
+        {
+             ui->tableView_2->setModel(e1.tri_quantite());
+        }
+
+     if(arg1=="Description")
+        {
+             ui->tableView_2->setModel(e1.tri_description());
+        }
+
+     if(arg1=="Date")
+        {
+             ui->tableView_2->setModel(e1.tri_date());
+        }
+
+     if(arg1=="Prix")
+        {
+             ui->tableView_2->setModel(e1.tri_prix());
+        }
+}
+
+void MainWindow::on_chercher_equi_clicked()
+{
+    QString a1= ui->lineEdit_29->text() ;
+    ui->tableView_2->setModel(e1.recherche_code(a1));
+}
+
+void MainWindow::on_modifier_equi_clicked()
+{
+    QString a1=ui->comboBox_16->currentText();
+    QString b2=ui->lineEdit_e22->text();
+    int c3=ui->lineEdit_e33->text().toInt();
+    QDate d3=ui->dateEdit_e2->date();
+    float e4=ui->lineEdit_e44->text().toFloat();
+
+  equipements e1(a1,b2,c3,d3,e4);
+       {
+       bool test = e1.modifier();
+       if(test)
+
+       {
+           QMessageBox::information(nullptr,("modifier equipement"),("equipement modifié"));
+           ui->tableView_2->setModel(e1.afficher());
+       }
+   else
+       {QMessageBox::warning(nullptr,("Amodifier equipement"),("equipement non modifié"));
+       }
+       }
+}
+
+void MainWindow::on_supprimer_equi_clicked()
+{
+    QString a1=ui->lineEdit_supp->text();
+       bool test=e1.supprimer(a1);
+       if (a1!='\0'){
+      QMessageBox::StandardButton supprimer_equi = QMessageBox::question(this,"suppression","confirmer la suppression !!!",QMessageBox::Yes|QMessageBox::No);
+       if (supprimer_equi == QMessageBox::Yes)  {
+           if(test)
+
+                    QMessageBox::information(nullptr, QObject::tr("Supprimer un equipement"),
+                                QObject::tr("equipement supprimé.\n"
+                                            "Click OK to exit."), QMessageBox::Cancel);
+              }
+              else
+                  QMessageBox::critical(nullptr, QObject::tr("supprimer un equipement"),
+                              QObject::tr("Erreur !.\n"
+                                          "Veuillez saisir un idCon pour supprimer un equipement .\n"
+                                          "Click Cancel to exit."), QMessageBox::Cancel);
+
+   }
+}
+
+void MainWindow::on_comboBox_14_activated(const QString &arg1)
+{
+    QString a=ui->comboBox_14->currentText();
+          QSqlQuery query;
+          query.prepare("select * from fournisseur where id =:id");
+          query.bindValue(":id", a);
+
+          if (query.exec())
+          {
+
+              while (query.next()) {
+
+                   ui->comboBox_14->setCurrentText(query.value(0).toString());
+                   ui->lineEdit_27->setText(query.value(1).toString());
+                   ui->lineEdit_33->setText(query.value(2).toString());
+                   ui->lineEdit_44->setText(query.value(3).toString());
+                   ui->lineEdit_55->setText(query.value(4).toString());
+
+              }
+          }
+}
+
+void MainWindow::on_comboBox_16_activated(const QString &arg1)
+{
+    QString a1=ui->comboBox_16->currentText();
+          QSqlQuery query;
+          query.prepare("select * from equipements where code =:code");
+          query.bindValue(":code", a1);
+
+          if (query.exec())
+          {
+
+              while (query.next()) {
+
+                   ui->comboBox_16->setCurrentText(query.value(0).toString());
+                   ui->lineEdit_e22->setText(query.value(1).toString());
+                   ui->lineEdit_e33->setText(query.value(2).toString());
+                   ui->dateEdit_e2->setDate(query.value(3).toDate());
+                   ui->lineEdit_e44->setText(query.value(4).toString());
+
+              }
+          }
+}
+
+void MainWindow::on_tabWidget_11_tabBarClicked(int index)
+{
+    QPieSeries *series= new QPieSeries();
+      QSqlQuery query;
+      query.prepare("select description, quantite from equipements;");
+      QVector<int> q;
+      QVector<QString> vectdesc;
+      if(query.exec()){
+          while(query.next()){
+          vectdesc.push_back(query.value(0).toString());
+          q.push_back(query.value(1).toInt());
+            }
+
+       int s=0;
+       for (int i=0;i<q.size();i++) s+=q[i];
+
+       for (int i=0;i<vectdesc.size();i++){
+      series->append(vectdesc[i], (qreal)((qreal)q[i]/(qreal)s)*100.0);
+
+         }
+      QChart *ch= new QChart();
+      ch->addSeries(series);
+      ch->setTitle(QString("statistique des quantitées de la table equipements par rapport au description"));
+      ch->legend()->show();
+      ch->setAnimationOptions(QChart::AllAnimations);
+      QChartView *chart=new QChartView(ch);
+      chart->setRenderHint(QPainter::Antialiasing);//graphique
+      chart->setGeometry(ui->graphicsView_22->geometry());//taille de la page
+      QGridLayout q;
+      q.addWidget(chart);
+      ui->graphicsView_22->setLayout(&q);
+      }
+}
+
+void MainWindow::refreshma(){
+ui->tableView->setModel(f.afficher());
+ui->tableView_2->setModel(e1.afficher());
+ui->comboBox_14->setModel(f.combo_box());
+ui->comboBox_16->setModel(e1.combo_box());
+}
+void MainWindow::on_pushButton_20_clicked()
+{
+    refreshma();
+}
+
+void MainWindow::on_actualiser_clicked()
+{
+    refreshma();
 }
