@@ -15,7 +15,7 @@
 #include "mailing/SmtpMime"
 #include <stdio.h>
 #include <string.h>
-#include "dialog.h"
+#include "connexion.h"
 #include <QtPrintSupport>
 #include <QPrintDialog>
 #include <QGraphicsView>
@@ -38,7 +38,7 @@
 #include <QPieSlice>
 #include "fournisseur.h"
 #include "equipements.h"
-
+#include "arduino.h"
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -70,13 +70,24 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tabcha_2->setModel(tmp_parking.afficher());
 
     /*  ************************************************  */
+
+
+
+
+    /*if (ui->stackedWidget->currentChanged(1))
+    {
+
+
+    }   */
+
+
     music1 =new QMediaPlaylist();
     music1->addMedia(QUrl("qrc:/images/backgmusic.mp3"));
     music1->setPlaybackMode(QMediaPlaylist::Loop);
     music = new QMediaPlayer();
     music->setPlaylist(music1);
     music->play();
-    music->setVolume(10);
+    music->setVolume(8);
     /*  **************refresh*******************  */
     ui->pushButton_5->setIcon((QIcon(":/images/refresh1.png")));
     ui->pushButton_5->setIconSize(ui->pushButton_5->size());
@@ -124,6 +135,7 @@ MainWindow::~MainWindow()
     delete ui;
     delete music;
     delete mainLayout;
+    delete music1;
 }
 void MainWindow::display_listes()
 {
@@ -133,6 +145,7 @@ void MainWindow::display_listes()
     ui->comboBox_2->setModel(tmp_inter.combo_box());
     ui->tabcha_2->setModel(tmp_parking.afficher());
     ui->comboBox_6->setModel(tmp_parking.combo_box());
+    ui->comboBox_18->setModel(tmp_inter.combo_box1());
     ui->widget->setLayout(mainLayout);
     refresh_stat();
 }
@@ -724,8 +737,7 @@ void MainWindow::on_pushButton_9_clicked()
 void MainWindow::on_pushButton_10_clicked()
 {
     playaudio();
-    Dialog d;
-    d.exec();
+    ui->stackedWidget->setCurrentIndex(2);
 
 }
 
@@ -1044,10 +1056,12 @@ void MainWindow::on_comboBox_6_activated(const QString &)
 
 
               playaudio();
-              ui->lineEdit_24->setText(query.value(0).toString());
+
               ui->comboBox_6->setCurrentText(query.value(0).toString());
               ui->lineEditadres_5->setText(query.value(1).toString());
               ui->lineEditsurface_5->setText(query.value(2).toString());
+              ui->comboBox_5->setCurrentText(query.value(3).toString());
+
 
          }
      }
@@ -1757,4 +1771,169 @@ void MainWindow::on_pushButton_20_clicked()
 void MainWindow::on_actualiser_clicked()
 {
     refreshma();
+}
+
+void MainWindow::on_connexion_4_clicked()
+{
+
+
+    if((ui->pseudo_4->text()=="admin") && (ui->mdp_4->text()=="admin"))
+    {
+            QMessageBox::information(nullptr, QObject::tr("Se connecter"),
+                        QObject::tr("Connexion réussie.\n"
+                                    "Cliquez sur ok pour continuer."), QMessageBox::Ok);
+            ui->stackedWidget->setCurrentIndex(1);
+            display_listes();
+            refresh();
+            refreshma();
+    }
+    else
+    {
+        QMessageBox::information(nullptr, QObject::tr("Se connecter"),
+                    QObject::tr("La connexion a échoué.\n"
+                                "Veuillez réessayer."), QMessageBox::Cancel);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*QString a=ui->pseudo_4->text();
+    QString b=ui->mdp_4->text();
+
+    QSqlQuery query;
+    query.prepare("select * from login where pse=(:pse) and mdp=(:mdp)");
+    query.bindValue(":pse",a);
+    query.bindValue(":mdp",b);
+    //if((ui->pseudo_4->text()=="admin") && (ui->mdp_4->text()=="admin"))
+
+
+
+
+
+
+
+
+
+    if(query.exec()){
+
+
+        int count=0;
+
+
+
+
+
+        if(query.next())
+    {
+            //count++;
+            QMessageBox::information(nullptr, QObject::tr("Se connecter"),
+                        QObject::tr("Connexion réussie.\n"
+                                    "Cliquez sur ok pour continuer."), QMessageBox::Ok);
+           ui->stackedWidget->setCurrentIndex(1);
+           display_listes();
+           refresh();
+           refreshma();
+    }
+    if(count==2)
+    {
+        QMessageBox::information(nullptr, QObject::tr("Se connecter"),
+                                QObject::tr("Connexion réussie.\n"
+                                            "Cliquez sur ok pour continuer."), QMessageBox::Ok);
+                   ui->stackedWidget->setCurrentIndex(1);
+                   display_listes();
+                   refresh();
+                   refreshma();
+      }
+
+       if (count<1)
+       {
+
+
+
+        QMessageBox::information(nullptr, QObject::tr("Se connecter"),
+                    QObject::tr("La connexion a échoué.\n"
+                                "Veuillez réessayer."), QMessageBox::Cancel);
+    }}*/
+
+}
+
+void MainWindow::on_pushButton_envoyer_clicked()
+{
+    playaudio();
+    SmtpClient smtp("smtp.gmail.com", 465, SmtpClient::SslConnection);
+
+
+
+
+                smtp.setUser("smartmunicipality40@gmail.com");
+                smtp.setPassword("municipality");
+
+
+
+        MimeMessage message;
+
+        message.setSender(new EmailAddress("smartmunicipality40@gmail.com", "Mohamed aouadi"));
+        message.addRecipient(new EmailAddress(ui->lineEdit_adresse->text(), "Recipient's name"));
+        message.setSubject(ui->lineEdit_objet->text());
+
+
+
+        MimeText text;
+
+        text.setText(ui->textEdit_texte->toPlainText());
+
+
+
+        message.addPart(&text);
+
+
+        smtp.connectToHost();
+        smtp.login();
+        if (smtp.sendMail(message)){
+           QMessageBox::information(this, "OK", "email envoyé");
+        }
+        else{
+           QMessageBox::critical(this, "Erreur","email non envoyé");
+        }
+        smtp.quit();
+
+}
+
+void MainWindow::on_pushButton_envoyer_2_clicked()
+{
+    playaudio();
+    ui->stackedWidget->setCurrentIndex(1);
+}
+
+void MainWindow::on_comboBox_18_activated(const QString &)
+{
+    QString a=ui->comboBox_18->currentText();
+     QSqlQuery query;
+     query.prepare("select * from inter where email=:email");
+     query.bindValue(":email", a);
+
+     if (query.exec())
+     {
+
+         while (query.next()) {
+
+
+              playaudio();
+              ui->lineEdit_adresse->setText(query.value(4).toString());
+
+
+         }
+     }
 }

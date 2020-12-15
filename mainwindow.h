@@ -32,7 +32,7 @@ public:
     poste tmpposte ;
     void refresh();
     void refreshma();
-
+Ui::MainWindow *ui;
 
 private slots:
     void on_pushButton_clicked();
@@ -193,8 +193,16 @@ void on_tabcha_2_activated(const QModelIndex &index);
 
     void on_actualiser_clicked();
 
+    void on_connexion_4_clicked();
+
+    void on_pushButton_envoyer_clicked();
+
+    void on_pushButton_envoyer_2_clicked();
+
+    void on_comboBox_18_activated(const QString &arg1);
+
 private:
-    Ui::MainWindow *ui;
+    //Ui::MainWindow *ui;
     chantier tmp_chantier;
     intervenat tmp_inter;
     QMediaPlaylist* music1;

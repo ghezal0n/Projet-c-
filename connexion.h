@@ -13,6 +13,7 @@ public:
     Connection();
     void fermerConnection();
     bool createconnect();
+
 };
 
 #endif // CONNEXTION_H

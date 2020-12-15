@@ -1,4 +1,4 @@
-QT       += core gui sql printsupport charts
+QT       += core gui sql printsupport charts serialport
 QT       +=multimedia
 QT       += network
 
@@ -11,9 +11,9 @@ CONFIG += console
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    arduino.cpp \
     chantier.cpp \
     connexion.cpp \
-    dialog.cpp \
     employe.cpp \
     equipements.cpp \
     fournisseur.cpp \
@@ -37,9 +37,9 @@ SOURCES += \
     stat.cpp
 
 HEADERS += \
+    arduino.h \
     chantier.h \
     connexion.h \
-    dialog.h \
     employe.h \
     equipements.h \
     fournisseur.h \
@@ -64,7 +64,6 @@ HEADERS += \
     stat.h
 
 FORMS += \
-    dialog.ui \
     mainwindow.ui
 
 # Default rules for deployment.
