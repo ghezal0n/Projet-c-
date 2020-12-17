@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     //authentification show;
     Connection c;
+
     MainWindow w;
     bool test=c.createconnect();
     if(test)

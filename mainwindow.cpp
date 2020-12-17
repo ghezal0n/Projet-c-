@@ -45,6 +45,17 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 
     ui->setupUi(this);
+
+    int ret=a.connect_arduino();
+    switch (ret){
+    case(0):qDebug()<< "arduino is available and connected to :" << a.getarduino_port_name();
+        break;
+    case(1):qDebug()<< "arduino is available but not connected to :" << a.getarduino_port_name();
+        break;
+    case(-1):qDebug()<< "arduino is not available :";
+    }
+    QObject::connect(a.getserial(),SIGNAL(readyRead()),this,SLOT(arduinowork()));
+
     /*  **************sout*******************  */
     ui->pushButton_4->setIcon((QIcon(":/images/on.png")));
     ui->pushButton_4->setIconSize(ui->pushButton_4->size());
@@ -112,7 +123,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pushButton_8->setIconSize(ui->pushButton_8->size());
     ui->pushButton_9->setIcon((QIcon(":/images/60578.png")));
     ui->pushButton_9->setIconSize(ui->pushButton_9->size());
-
+    ui->lcdNumber->display("__");
     mainLayout=new QVBoxLayout ;
     mainLayout->addWidget(s.Preparechart());
     ui->widget->setLayout(mainLayout);
@@ -137,6 +148,55 @@ MainWindow::~MainWindow()
     delete mainLayout;
     delete music1;
 }
+
+
+bool MainWindow::modi(QString a,QString b)
+{
+    QSqlQuery query;
+    query.prepare("UPDATE parking SET res=:res WHERE id=:id");
+    query.bindValue(":res",a);
+    query.bindValue(":id",b);
+    return query.exec();
+}
+void MainWindow::arduinowork()
+{
+QString n;
+info = a.read_from_arduino();
+QString j=QString::fromStdString(info.toStdString());
+qDebug() << j;
+QString b= QString::number(1);
+QSqlQuery query;
+query.prepare("select nbr from parking WHERE id=:id");
+query.bindValue(":id",b);
+query.exec();
+while(query.next())
+{
+n =query.value(0).toString();
+}
+if (j<=n)
+{
+updatelcd(j);
+bool test =modi(j,b);
+if (test)
+{
+a.write_to_arduino("2");
+}
+ui->tabcha_2->setModel(tmp_parking.afficher());
+}
+if(j>n)
+{
+a.write_to_arduino("3");
+a.write_to_arduino("1");
+}
+
+
+
+
+
+}
+void MainWindow::updatelcd(QString c)
+{ui->lcdNumber->display(c);
+}
 void MainWindow::display_listes()
 {
     ui->tabchantier->setModel(tmp_chantier.afficher());
@@ -148,6 +208,7 @@ void MainWindow::display_listes()
     ui->comboBox_18->setModel(tmp_inter.combo_box1());
     ui->widget->setLayout(mainLayout);
     refresh_stat();
+
 }
 void MainWindow::refresh_stat()
 {
@@ -961,7 +1022,7 @@ void MainWindow::on_pb_ok1_5_clicked()
 
 void MainWindow::on_comboBox_7_activated(const QString &arg1)
 {
-    if(arg1=="ID")
+   /* if(arg1=="ID")
        {
         if (ui->radioButton_24->isChecked())
         {
@@ -986,7 +1047,7 @@ void MainWindow::on_comboBox_7_activated(const QString &arg1)
             ui->tabcha_2->setModel(tmp_parking.trier_2());
             playaudio();
         }
-       }
+       }*/
 }
 
 void MainWindow::on_pushButton_22_toggled(bool checked)
@@ -1775,9 +1836,16 @@ void MainWindow::on_actualiser_clicked()
 
 void MainWindow::on_connexion_4_clicked()
 {
-
-
-    if((ui->pseudo_4->text()=="admin") && (ui->mdp_4->text()=="admin"))
+    QString a,b;
+    QSqlQuery query;
+    query.prepare("select pse,mdp from login ");
+    query.exec();
+    while(query.next())
+    {
+    a =query.value(0).toString();
+    b =query.value(0).toString();
+    }
+    if((ui->pseudo_4->text()==a) && (ui->mdp_4->text()==b))
     {
             QMessageBox::information(nullptr, QObject::tr("Se connecter"),
                         QObject::tr("Connexion réussie.\n"
@@ -1794,78 +1862,6 @@ void MainWindow::on_connexion_4_clicked()
                                 "Veuillez réessayer."), QMessageBox::Cancel);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*QString a=ui->pseudo_4->text();
-    QString b=ui->mdp_4->text();
-
-    QSqlQuery query;
-    query.prepare("select * from login where pse=(:pse) and mdp=(:mdp)");
-    query.bindValue(":pse",a);
-    query.bindValue(":mdp",b);
-    //if((ui->pseudo_4->text()=="admin") && (ui->mdp_4->text()=="admin"))
-
-
-
-
-
-
-
-
-
-    if(query.exec()){
-
-
-        int count=0;
-
-
-
-
-
-        if(query.next())
-    {
-            //count++;
-            QMessageBox::information(nullptr, QObject::tr("Se connecter"),
-                        QObject::tr("Connexion réussie.\n"
-                                    "Cliquez sur ok pour continuer."), QMessageBox::Ok);
-           ui->stackedWidget->setCurrentIndex(1);
-           display_listes();
-           refresh();
-           refreshma();
-    }
-    if(count==2)
-    {
-        QMessageBox::information(nullptr, QObject::tr("Se connecter"),
-                                QObject::tr("Connexion réussie.\n"
-                                            "Cliquez sur ok pour continuer."), QMessageBox::Ok);
-                   ui->stackedWidget->setCurrentIndex(1);
-                   display_listes();
-                   refresh();
-                   refreshma();
-      }
-
-       if (count<1)
-       {
-
-
-
-        QMessageBox::information(nullptr, QObject::tr("Se connecter"),
-                    QObject::tr("La connexion a échoué.\n"
-                                "Veuillez réessayer."), QMessageBox::Cancel);
-    }}*/
 
 }
 

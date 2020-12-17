@@ -12,6 +12,7 @@
 #include "poste.h"
 #include "fournisseur.h"
 #include "equipements.h"
+#include "arduino.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -32,6 +33,9 @@ public:
     poste tmpposte ;
     void refresh();
     void refreshma();
+    bool modi(QString,QString);
+
+
 Ui::MainWindow *ui;
 
 private slots:
@@ -40,7 +44,8 @@ private slots:
     void on_modifierchantier_clicked();
 
     void on_id_chmo_activated(const QString &arg1);
-
+void arduinowork();
+void updatelcd(QString);
 
     void on_tabchantier_activated(const QModelIndex &index);
 
@@ -212,6 +217,8 @@ private:
     Stat s;
     fournisseur f;
     equipements e1;
+    Arduino a;
+    QByteArray info;
 };
 #endif // MAINWINDOW_H
 

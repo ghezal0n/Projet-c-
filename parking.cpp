@@ -18,11 +18,12 @@ bool parking::ajouter()
     QString res1= QString::number(nbrpar);
 
 
-    query.prepare("INSERT INTO parking (ID,adresse,nbr,type) VALUES (:id,:adresse,:nbr,:type)");
+    query.prepare("INSERT INTO parking (ID,adresse,nbr,type,res) VALUES (:id,:adresse,:nbr,:type,:res)");
     query.bindValue(":id",res);
     query.bindValue(":adresse",adresse);
     query.bindValue(":nbr",res1);
     query.bindValue(":type",type);
+    query.bindValue(":res","0");
     return    query.exec();
 }
 QSqlQueryModel * parking::afficher()
@@ -34,6 +35,8 @@ model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
 model->setHeaderData(1, Qt::Horizontal, QObject::tr("Adresse"));
 model->setHeaderData(2, Qt::Horizontal, QObject::tr("Nombre de places de parking"));
 model->setHeaderData(3, Qt::Horizontal, QObject::tr("Type de parking"));
+model->setHeaderData(4, Qt::Horizontal, QObject::tr("les places réservés"));
+
 
     return model;
 }
@@ -74,6 +77,7 @@ model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
 model->setHeaderData(1, Qt::Horizontal, QObject::tr("Adresse"));
 model->setHeaderData(2, Qt::Horizontal, QObject::tr("Nombre de places de parking"));
 model->setHeaderData(3, Qt::Horizontal, QObject::tr("Type de parking"));
+model->setHeaderData(4, Qt::Horizontal, QObject::tr("les places réservés"));
     return model;
 }
 QSqlQueryModel * parking::chercheradresse(const QString &type)
@@ -85,6 +89,7 @@ model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
 model->setHeaderData(1, Qt::Horizontal, QObject::tr("Adresse"));
 model->setHeaderData(2, Qt::Horizontal, QObject::tr("Nombre de places de parking"));
 model->setHeaderData(3, Qt::Horizontal, QObject::tr("Type de parking"));
+model->setHeaderData(4, Qt::Horizontal, QObject::tr("les places réservés"));
     return model;
 }
 QSqlQueryModel * parking::trier_1()
@@ -98,6 +103,7 @@ QSqlQueryModel * parking::trier_1()
                       model->setHeaderData(1, Qt::Horizontal, QObject::tr("Adresse"));
                       model->setHeaderData(2, Qt::Horizontal, QObject::tr("Nombre de places de parking"));
                       model->setHeaderData(3, Qt::Horizontal, QObject::tr("Type de parking"));
+                      model->setHeaderData(4, Qt::Horizontal, QObject::tr("les places réservés"));
       return  model;
 }
 QSqlQueryModel * parking::trier_2()
@@ -111,6 +117,7 @@ QSqlQueryModel * parking::trier_2()
                       model->setHeaderData(1, Qt::Horizontal, QObject::tr("Adresse"));
                       model->setHeaderData(2, Qt::Horizontal, QObject::tr("Nombre de places de parking"));
                       model->setHeaderData(3, Qt::Horizontal, QObject::tr("Type de parking"));
+                      model->setHeaderData(4, Qt::Horizontal, QObject::tr("les places réservés"));
       return  model;
 }
 QSqlQueryModel * parking::trier_3()
@@ -124,6 +131,7 @@ QSqlQueryModel * parking::trier_3()
                       model->setHeaderData(1, Qt::Horizontal, QObject::tr("Adresse"));
                       model->setHeaderData(2, Qt::Horizontal, QObject::tr("Nombre de places de parking"));
                       model->setHeaderData(3, Qt::Horizontal, QObject::tr("Type de parking"));
+                      model->setHeaderData(4, Qt::Horizontal, QObject::tr("les places réservés"));
       return  model;
 }
 QSqlQueryModel * parking::trier_4()
@@ -137,5 +145,6 @@ QSqlQueryModel * parking::trier_4()
                       model->setHeaderData(1, Qt::Horizontal, QObject::tr("Adresse"));
                       model->setHeaderData(2, Qt::Horizontal, QObject::tr("Nombre de places de parking"));
                       model->setHeaderData(3, Qt::Horizontal, QObject::tr("Type de parking"));
+                      model->setHeaderData(4, Qt::Horizontal, QObject::tr("les places réservés"));
       return  model;
 }
